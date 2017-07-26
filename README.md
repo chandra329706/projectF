@@ -1,2 +1,0 @@
-# projectF
-Flexypay project
