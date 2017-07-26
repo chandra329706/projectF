@@ -20,7 +20,7 @@
                         <div class="innter-form">
                             <div *ngIf="LoggedUserDetails.status==0" style="padding:10px 0px; color:red">{{LoggedUserDetails.message}}</div>
                             <form class="sa-innate-form" method="post" #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)">
-                                <label>Email Address</label>
+                                <label>Email / Mobile</label>
                                 <input type="text" name="username" ngModel>
                                 <label>Password</label>
                                 <input type="password" name="password" ngModel>

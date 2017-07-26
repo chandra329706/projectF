@@ -48,6 +48,8 @@ export class AddBeneficiaryService{
     }
 
     checkUserStatus(){
+        console.log(this.userid);
+        console.log(this.signature);
         return this._http.post(this.baseUrl+'user/status',this.inputParams,this.requestOptions).map(res=>res.json());
     }
 

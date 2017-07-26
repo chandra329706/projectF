@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
-import 'rxjs/add/operator/map';import {Observable} from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+// import {Observable} from 'rxjs/Rx';
 
 
 @Injectable()
@@ -16,15 +17,12 @@ export class NavBarService {
     headers = new Headers({'Content-Type':'Application/json','Accept':'application/json'});
     requestOptions = new RequestOptions({'headers':this.headers});
 
-    checkValidLogin(){
-        // return this._http.post(this.baseUrl+'tax_list',this.inputParams, this.requestOptions).map(res=>{res.json();console.log(res);console.log('checked');})
-        console.log('check');
-    }
-
-
+    // checkValidLogin(){
+    //     console.log('check');
+    //     return this._http.post(this.baseUrl+'tax_list',this.inputParams, this.requestOptions).map(res=>{res.json();console.log(res);console.log('checked');})
+    // }
 }
 
 //   Observable.interval(200 * 60).subscribe(x => {
-//     console.log("Check");
-//         return this._http.post(this.baseUrl+'tax_list',this.inputParams, this.requestOptions).map(res=>{res.json();console.log(res);console.log('checked');})
+//       checkValidLogin();
 //   });
