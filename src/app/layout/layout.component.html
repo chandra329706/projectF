@@ -1,0 +1,12 @@
+<div class="wrapper" *ngIf="IsLoggedIn==true">
+    <app-navbar></app-navbar>
+    <app-sidebar></app-sidebar>
+
+    <div class="content-wrapper">
+        <app-second-menu></app-second-menu>
+        <router-outlet></router-outlet>
+    </div>
+</div>
+<div class="treeview text-right" style="border-top:1px solid #ccc;bottom:0;width:100%;padding:10px 30px;"><span style="color:#000;text-align:center; font-size:12px;">Copyrights @ Flexypay</span></div>
+
+<router-outlet *ngIf="IsLoggedIn==false"></router-outlet>

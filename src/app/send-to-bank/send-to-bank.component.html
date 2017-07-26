@@ -1,0 +1,298 @@
+<div *ngIf="UserStatus==1 && IsMenuActive==1" class="row" style="text-align:center">
+    You have not verified your pancard document. Please upload it here <a [routerLink]="['/profile']" class="btn btn-danger">Upload KYC </a>
+</div>
+<div *ngIf="UserStatus==6 && IsMenuActive==1" class="row" style="text-align:center">
+    Your pancard is pending for approval. Till then you cannot do this operation.
+</div>
+<div *ngIf="IsMenuActive == 1">
+    <!-- Your Content goes Here -->
+    <div>
+        <div>
+            <div class="form-group">
+                <div>
+                    <label class="pull-left"><h3 style="line-height: 0.1;padding-right: 20px;"><span class="orange"><b>Send to Bank </b><small>( Bank Account Payments )</small></span></h3></label><br><br>
+                </div>
+            </div>
+        </div>
+        <form #sendToBankForm="ngForm" novalidate>
+            <div class="row" style="padding:5%;background: #fff">
+                <div class="col-lg-7 col-md-8 bdr-rgt">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-md-6">
+                                <section style="border:1px dashed #b7b7b7">
+                                    <select class="cs-select cs-skin-elastic" name="selectedUserVal" #selectedUserVal="ngModel" [(ngModel)]="selectedUser" (change)="getBUserDetails()" required>
+                                    <option value="">Select User</option>
+                                    <option *ngFor="let user of UserListData.data" [value]="user.Id">{{user.BeneficiaryName}}</option>
+                                </select>
+                                </section>
+                                <div *ngIf="selectedUserVal.touched && (selectedUserVal.errors || selectedUserVal.invalid)" class="">
+                                    <div *ngIf="selectedUserVal.errors['required']">
+                                        <p class="error-text">Please select the User</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <section style="border:1px dashed #b7b7b7">
+                                    <select class="cs-select cs-skin-elastic" name="selectedPurposeVal" #selectedPurposeVal="ngModel" [(ngModel)]="selectedPurpose" required>
+                                     <option value="">Select Purpose</option>
+                                    <option *ngFor ="let purpose of UserPurposeListData.data" [ngValue]="purpose.id" >{{purpose.purpose_name}}</option>                
+                                </select>
+                                </section>
+                                <div *ngIf="selectedPurposeVal.touched && (selectedPurposeVal.errors || selectedPurposeVal.invalid)" class="">
+                                    <div *ngIf="selectedPurposeVal.errors['required']">
+                                        <p class="error-text">Please select the purpose</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" *ngIf="selectedPurpose==6">
+                                <section>
+                                    <input class="effect-2" type="text" name="otherPurposeVal" #otherPurposeVal="ngModel" [(ngModel)]="otherPurpose" placeholder="Purpose" required>
+                                    <span class="focus-border"></span>
+                                    <div *ngIf="otherPurposeVal.touched && (otherPurposeVal.errors || otherPurposeVal.invalid)" class="">
+                                        <div *ngIf="otherPurposeVal.errors['required']">
+                                            <p class="error-text">Please list the purpose</p>
+                                        </div>
+                                        <div *ngIf="otherPurposeVal.errors['invalid']">
+                                            <p class="error-text">Please list the purpose</p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div class="col-md-6">
+                                <section>
+                                    <input class="effect-2" type="text" name="AmountVal" pattern="^(?:[2-9]|[2-9]\.\d*|[1-9]\d\d*|[1-9]\d\d*\.\d*)$" #AmountVal="ngModel" placeholder="Amount" [(ngModel)]="Amount" (keyup)="checkPaymethod(0,0)" required>
+                                    <span class="focus-border"></span>
+                                    <div *ngIf="AmountVal.touched && (AmountVal.errors || AmountVal.invalid)" class="">
+                                        <div *ngIf="AmountVal.errors['required']">
+                                            <p class="error-text">Please enter the amount</p>
+                                        </div>
+                                        <div *ngIf="AmountVal.errors['pattern']">
+                                            <p class="error-text">Please enter amount greater than 2 <span style="font-family:arial">&#x20B9;</span></p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="col-md-6">
+                                <section>
+                                    <input class="effect-2" type="text" placeholder="Remarks" [(ngModel)]="Remarks" name="remarks" #remarks="ngModel" required>
+                                    <span class="focus-border"></span>
+                                    <div *ngIf="remarks.touched && (remarks.errors || remarks.invalid)" class="">
+                                        <div *ngIf="remarks.errors['required']">
+                                            <p class="error-text">Please enter the remarks</p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <section>
+                                <div class="inline-group text-left" style="padding:20px">
+                                    <label class="checkbox">
+                                <input type="checkbox" name="useWalletAmountVal" #useWalletAmountVal="ngModel" [(ngModel)]="useWalletAmount" (change)="checkPaymethod(0,0)"><i></i>Use Wallet Amount - <small><a href="">Terms of Usage</a></small></label>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+
+
+                    <div>
+
+                        <h3 style="line-height: 0.1;padding-right: 20px;"><small><span class="orange"><b>Mode of Payment</b></span></small></h3>
+
+                        <div class="row">
+                            <div class="col-md-6" *ngFor="let Pmethod of PaymentMethodList.data; let i= index">
+                                <ng-container *ngIf="Pmethod.id != 7">
+                                    <section class="pay-mode">
+                                        <div class="inline-group text-center">
+                                            <label class="checkbox"><input type="radio" name="payment_mode" [value]="Pmethod" (click)="checkPaymethod(Pmethod)" [checked]="Pmethod.id==5"><i></i> {{Pmethod.field_name}}</label>
+                                            <small>{{Pmethod.field_value}}% Processing Fee.</small>
+                                        </div>
+                                    </section>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="payMethod == '6'">
+
+                        <h3 style="line-height: 0.1;padding-right: 20px;"><small><span class="orange"><b>Payment Gateway</b></span></small></h3>
+                        <div class="row">
+                            <div>
+                                <div class="col-md-6" *ngFor="let Pgateway of PaymentGatewayList.data; let j= index">
+                                    <section class="pay-mode">
+                                        <div class="inline-group text-center">
+                                            <label class="checkbox"><input type="radio" name="payment_gateway" [value]="Pgateway.field_name" (click)="checkPaymentGateway(Pgateway)" [checked]="j==0?'checked':''" ><i></i> {{Pgateway.field_name}}</label>
+
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <h3 style="line-height: 0.1;padding-right: 20px;"><small><span class="orange"><b>Settlement Type</b></span></small></h3>
+
+                        <div class="row">
+                            <div>
+                                <div class="col-md-6" *ngFor="let settlement of SettlementList.data; let i= index">
+                                    <section class="pay-mode">
+                                        <div class="inline-group text-center">
+                                            <label class="checkbox">
+                                            <input type="radio" name="settlementType" [value]="settlement.value" [checked]="i==0?'checked':''" (click)="calculateSettlementAmount(settlement)" ><i></i> {{settlement.settelement_type}}</label>
+                                            <small *ngIf="settlement.settelement_type == 'Regular'">Transaction day + {{settlement.time}} Days</small>
+                                            <small *ngIf="settlement.settelement_type == 'Express'">Same day within {{settlement.time}} Hours</small>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-5">
+                    <div>
+                        <div class="col-md-12">
+                            <h3 class="text-center">Payment Summary</h3>
+                            <hr>
+
+                            <div class="pull-left">
+                                <h5>Beneficiary Name</h5>
+                            </div>
+                            <div class="pull-right">
+                                <h5 class="text-right">
+                                    <span class="orange">{{userName}}</span>
+                                </h5>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="pull-left">
+                                <h5>IFSC Code</h5>
+                            </div>
+                            <div class="pull-right">
+                                <h5 class="text-right">
+                                    <span class="orange">{{Ifsc}}</span>
+                                </h5>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="pull-left">
+                                <h5>Name of the Bank</h5>
+                            </div>
+                            <div class="pull-right">
+                                <h5 class="text-right">
+                                    <span class="orange">{{BankName}}</span>
+                                </h5>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="pull-left">
+                                <h5>Account Number</h5>
+                            </div>
+                            <div class="pull-right">
+                                <h5 class="text-right">
+                                    <span class="orange">{{accountNumber}}</span>
+                                </h5>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="pull-left">
+                                <h5>Type of Payment</h5>
+                            </div>
+                            <div class="pull-right">
+                                <h5 class="text-right">
+                                    <span class="orange">{{paymentMethod}}</span>
+                                </h5>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="pull-left">
+                                <h5>Amount</h5>
+                            </div>
+                            <div class="pull-right">
+                                <h4 class="text-right">
+                                    <span class="orange"><b> {{Amount}} <span style="font-family:arial">&#x20B9;</span></b>
+                                    </span>
+                                </h4>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="pull-left">
+                                <h5>Wallet Amount</h5>
+                            </div>
+                            <div class="pull-right">
+                                <h4 class="text-right">
+                                    <span class="orange"><b> - {{walletAmountUsed}} <span style="font-family:arial">&#x20B9;</span></b>
+                                    </span>
+                                </h4>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="pull-left">
+                                <h5>Convenience fee</h5>
+                            </div>
+                            <div class="pull-right">
+                                <h4 class="text-right">
+                                    <span class="orange"><b> {{ConvenienceFeeAmount}}  <span style="font-family:arial">&#x20B9;</span></b>
+                                    </span>
+                                </h4>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div *ngFor="let tax of UpdatedTaxesList">
+                                <div class="pull-left">
+                                    <span *ngIf="tax.tax_type==2">
+                                    <h5>{{tax.tax_name}} ({{tax.tax_amount}} %)</h5>
+                                </span>
+                                    <span *ngIf="tax.tax_type==1">
+                                    <h5>{{tax.tax_name}} ({{tax.tax_amount}} &#x20B9;)</h5>
+                                </span>
+                                </div>
+
+                                <div class="pull-right">
+                                    <h4 class="text-right">
+
+                                        <span class="orange"><b> {{tax.tax_value | number : '1.2-2' }}<span style="font-family:arial">&#x20B9;</span></b>
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+
+
+
+                            <hr>
+                            <div class="pull-left">
+                                <h5>Total Payable Amount</h5>
+                            </div>
+                            <div class="pull-right">
+                                <h4 class="text-right">
+                                    <span class="orange"><b> <span class="big">{{TotalAmount | number : '1.2-2'}} <span style="font-family:arial">&#x20B9;</span></span>
+                                    </b>
+                                    </span>
+                                </h4>
+                            </div>
+                            <div class="clearfix"></div>
+                            <app-payment-component #paymentFormComponent></app-payment-component>
+                            <button type="button" [disabled]="sendToBankForm.form['invalid'] || DisablePay || DisableUserPay" (click)="payFee()" class="btn btn-success btn-lg col-md-12">Pay Now</button>
+                            <span *ngIf="DisablePay  && UserStatus==3" style="color:red">Please wait your transaction is in process </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div *ngIf="IsMenuActive==0" class="row" style="text-align:center">
+    <span style="font-size:25px; "><b> This service is temporarily disabled... Please try after some time</b></span>
+</div>

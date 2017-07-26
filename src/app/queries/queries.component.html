@@ -1,0 +1,52 @@
+<div *ngIf="UserStatus==1" class="row" style="text-align:center">
+    You have not verified your pancard document. Please upload it here <a [routerLink]="['/profile']" class="btn btn-danger">Upload KYC </a>
+</div>
+<div>
+    <!-- Your Content goes Here -->
+
+    <div>
+        <div class="form-group">
+            <div>
+                <label class="pull-left"><h3 style="line-height: 0.1;padding-right: 20px;"><span class="orange"><b>Send a Query</b></span></h3></label><br><br>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding:2%;background: #fff">
+        <div *ngIf="QuerySubmitResult.status!=''">{{QuerySubmitResult.msg}}</div>
+        <i class="fa fa-question pull-right text-center animated rubberBand hidden-xs" aria-hidden="true"></i>
+        <form #queryForm="ngForm">
+            <div class="col-md-8 col-md-offset-1">
+                <div class="col-md-6">
+                    <section>
+                        <input class="effect-2" #username="ngModel" required type="text" placeholder="Name" ngModel name="uname">
+                        <span class="focus-border"></span>
+                        <div *ngIf="username.errors && username.touched" style="color:red">
+                            <span [hidden]="!username.errors['required']">Please enter your name</span>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-6">
+                    <section>
+                        <input class="effect-2" type="text" placeholder="Subject" #querySubject="ngModel" ngModel required name="query_subject">
+                        <span class="focus-border"></span>
+                        <div *ngIf="querySubject.errors && querySubject.touched" style="color:red">
+                            <span [hidden]="!querySubject.errors['required']">Please enter subject</span>    
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-12">
+
+                    <textarea class="form-control" style="resize: vertical;margin:20px 0" placeholder="Query Description here..." #queryDescription="ngModel" ngModel required name="query_description"></textarea>
+                    <div *ngIf="queryDescription.errors && queryDescription.touched" style="color:red">
+                        <span [hidden]="!queryDescription.errors['required']">Please enter your query description </span>
+                    </div>
+
+                </div>
+                <button type="button" [disabled]="!queryForm.form.valid" class="btn btn-success btn-lg col-md-4 col-md-offset-4" (click)="SubmitQuery(queryForm)">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Your Content Ends Here -->
+
+</div>

@@ -1,0 +1,26 @@
+<h1 *ngIf="UId">Please wait your payment is in process.....</h1>
+<form ngNoForm action="https://biz.traknpay.in/v1/paymentrequest" name="payment" method="POST" id="PaymentForm">                
+    <input type="hidden" [value]="api_key" name="api_key"/>         
+    <input type="hidden" [value]="returnUrl" name="return_url"/>         
+    <input type="hidden" value="LIVE" name="mode"/>         
+    <input type="hidden" [value]="PaymentOrderID" name="order_id"/>         
+    <input type="hidden" [value]="PayableAmount" name="amount"/>         
+    <input type="hidden" [value]="Currency" name="currency"/>         
+    <input type="hidden" [value]="PayableRemarks" name="description"/>         
+    <input type="hidden" [value]="Name" name="name"/>         
+    <input type="hidden" [value]="Email" name="email"/>         
+    <input type="hidden" [value]="Phone" name="phone"/>         
+    <input type="hidden" value="" name="address_line_1"/>         
+    <input type="hidden" value="" name="address_line_2"/>      
+    <input type="hidden" [value]="City" name="city"/>       
+    <input type="hidden" value="" name="state"/>
+    <input type="hidden" [value]="Zipcode" name="zip_code"/>         
+    <input type="hidden" [value]="Country" name="country"/>         
+    <input type="hidden" [value]="TransactionId" name="udf1"/>         
+    <input type="hidden" [value]="PaymentFor" name="udf2"/>         
+    <input type="hidden" [value]="UId" name="udf3"/>         
+    <input type="hidden" [value]="Code" name="udf4"/>         
+    <input type="hidden" value="" name="udf5"/>         
+    <input type="hidden" [value]="CalculatedHash" name="hash"/>         
+    <noscript><input type="submit" value="Continue"/></noscript>
+</form>

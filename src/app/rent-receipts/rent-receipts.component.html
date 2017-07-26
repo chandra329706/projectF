@@ -1,0 +1,330 @@
+<div *ngIf="UserStatus==1" class="row" style="text-align:center">
+    You have not verified your pancard document. Please upload it here <a [routerLink]="['/profile']" class="btn btn-danger">Upload KYC </a>
+</div>
+<div>
+    <!-- Your Content goes Here -->
+    <div>
+        <div class="form-group">
+            <div>
+                <label class="pull-left"><h3 style="line-height: 0.1;padding-right: 20px;"><span class="orange"><b>Rent Reciept</b></span></h3></label><br><br>
+            </div>
+        </div>
+    </div>
+    <div style="padding:5%;background:rgba(255,255,255,0.95)">
+        <form #rentReceipt="ngForm">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-1">
+                    <div class="col-xs-12">
+                        <section>
+                            <input class="effect-2" type="text" placeholder="Name of the Tenant" name="tenant_name" #tenantName="ngModel" [(ngModel)]="receipt.tenant" required>
+                            <span class="focus-border"></span>
+                            <div *ngIf="tenantName.errors && tenantName.touched" style="color:red">
+                                <span [hidden]="!tenantName.errors['required']">Please enter tenant name</span>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-xs-12">
+                        <section>
+                            <input class="effect-2" type="text" placeholder="House / Door / Flat #" name="house_no" #houseNum="ngModel" [(ngModel)]="receipt.hno" required>
+                            <span class="focus-border"></span>
+                            <div *ngIf="houseNum.errors && houseNum.touched" style="color:red">
+                                <span [hidden]="!houseNum.errors['required']">Please enter house / door / flat number</span>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-xs-12">
+                        <section>
+                            <input class="effect-2" type="text" placeholder="Locality" name="locality" #locality="ngModel" [(ngModel)]="receipt.locality" required>
+                            <span class="focus-border"></span>
+                            <div *ngIf="locality.errors && locality.touched" style="color:red">
+                                <span [hidden]="!locality.errors['required']">Please enter locality</span>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-xs-12">
+                        <section>
+                            <input class="effect-2" type="text" placeholder="Area" name="area" #area="ngModel" [(ngModel)]="receipt.area" required>
+                            <span class="focus-border"></span>
+                            <div *ngIf="area.errors && area.touched" style="color:red">
+                                <span [hidden]="!area.errors['required']">Please enter area</span>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-xs-12">
+                        <section>
+                            <input class="effect-2" type="text" placeholder="City" name="city" #city="ngModel" [(ngModel)]="receipt.city" required>
+                            <span class="focus-border"></span>
+                            <div *ngIf="city.errors && city.touched" style="color:red">
+                                <span [hidden]="!city.errors['required']">Please enter city</span>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-xs-12">
+                        <section>
+                            <input class="effect-2" type="text" placeholder="Pincode" name="pincode" #pinCode="ngModel" [(ngModel)]="receipt.pincode" required>
+                            <span class="focus-border"></span>
+                            <div *ngIf="pinCode.errors && pinCode.touched" style="color:red">
+                                <span [hidden]="!pinCode.errors['required']">Please enter pinCode</span>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-xs-12">
+                        <section>
+                            <input class="effect-2" type="text" placeholder="State" name="state" #state="ngModel" [(ngModel)]="receipt.state" required>
+                            <span class="focus-border"></span>
+                            <div *ngIf="state.errors && state.touched" style="color:red">
+                                <span [hidden]="!state.errors['required']">Please enter state</span>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="col-md-4 col-md-offset-1">
+                    <div class="col-xs-12">
+                        <section>
+                            <input class="effect-2" type="text" placeholder="Name of the Owner" name="owner_name" #ownerName="ngModel" [(ngModel)]="receipt.owner" required>
+                            <span class="focus-border"></span>
+                            <div *ngIf="ownerName.errors && ownerName.touched" style="color:red">
+                                <span [hidden]="!ownerName.errors['required']">Please enter owner name</span>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-xs-12">
+                        <section>
+                            <input class="effect-2" type="text" placeholder="Owner's Pan" name="owner_pan" #ownerPan="ngModel" [(ngModel)]="receipt.pan" required>
+                            <span class="focus-border"></span>
+                            <div *ngIf="ownerPan.errors && ownerPan.touched" style="color:red">
+                                <span [hidden]="!ownerPan.errors['required']">Please enter owner pan</span>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-xs-12">
+                        <section>
+                            <input class="effect-2" type="text" placeholder="Monthly Rent Amount" name="rent_amount" #rentAmount="ngModel" [(ngModel)]="receipt.amount" required>
+                            <span class="focus-border"></span>
+                            <div *ngIf="rentAmount.errors && rentAmount.touched" style="color:red">
+                                <span [hidden]="!rentAmount.errors['required']">Please enter rent amount</span>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-xs-12">
+                        <section>
+                            <input class="effect-2" type="text" placeholder="Reciept start date (YYYY-MM-DD)" id="datepicker-sdt" name="start_date" #startDate="ngModel" [(ngModel)]="receipt.startDate" required>
+                            <span class="focus-border"></span>
+                            <div *ngIf="startDate.errors && startDate.touched" style="color:red">
+                                <span [hidden]="!startDate.errors['required']">Please enter start date</span>
+
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-xs-12">
+                        <section>
+                            <input class="effect-2" type="text" placeholder="Reciept end date (YYYY-MM-DD)" id="datepicker-edt" name="end_date" #endDate="ngModel" [(ngModel)]="receipt.endDate" required>
+                            <span class="focus-border"></span>
+                            <div *ngIf="endDate.errors && endDate.touched" style="color:red">
+                                <span [hidden]="!endDate.errors['required']">Please enter end date</span>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-xs-12">
+                        <section>
+                            <input class="effect-2" type="text" placeholder="Email ID" name="email_id" #mailId="ngModel" [(ngModel)]="receipt.mail" required>
+                            <span class="focus-border"></span>
+                            <div *ngIf="mailId.errors && mailId.touched" style="color:red">
+                                <span [hidden]="!mailId.errors['required']">Please enter mail id</span>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-xs-12">
+                        <section>
+                            <input class="effect-2" type="text" placeholder="Mobile Number" name="mobile_number" #mobileNumber="ngModel" [(ngModel)]="receipt.mobile" required maxlength="10">
+                            <span class="focus-border"></span>
+                            <div *ngIf="mobileNumber.errors && mobileNumber.touched" style="color:red">
+                                <span [hidden]="!mobileNumber.errors['required']">Please enter mobile number</span>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"><br></div>
+            <div class="row text-center">
+                <!-- [disabled]="!rentReceipt.form.valid || Disabled"  -->
+                <button type="button" class="btn btn-success custom-button" data-target="#receiptPreview" data-toggle="modal"> Generate Reciept </button>
+            </div>
+            <!-- Your Content Ends Here -->
+        </form>
+    </div>
+</div>
+
+<!--Invoice Preview Modal-->
+<div id="receiptPreview" class="modal fade in">
+    <div class="modal-dialog fullwidth-modal">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Receipt Preview</h4>
+            </div>
+            <div class="modal-body">
+                <!--For PDF-->
+                <div #pdfMaker style="background: white;color: black; padding: 0px 70px;">
+                    <!--- PDF content starts -->
+                    <!-- <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <div class="col-md-3 col-md-offset-1">
+                                    Name of Tenant
+                                </div>
+                                <div class="col-md-1" style="text-align:center"> - </div>
+                                <div class="col-md-4">
+                                    {{receipt.tenant}}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-3 col-md-offset-1">
+                                    Owner Name
+                                </div>
+                                <div class="col-md-1" style="text-align:center"> - </div>
+                                <div class="col-md-4">
+                                    {{receipt.owner}}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-3 col-md-offset-1">
+                                    Owners Pan
+                                </div>
+                                <div class="col-md-1" style="text-align:center"> - </div>
+                                <div class="col-md-4">
+                                    {{receipt.pan}}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-3 col-md-offset-1">
+                                    House / Door / Flat - Number
+                                </div>
+                                <div class="col-md-1" style="text-align:center"> - </div>
+                                <div class="col-md-4">
+                                    {{receipt.hno}}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-3 col-md-offset-1">
+                                    Locality
+                                </div>
+                                <div class="col-md-1" style="text-align:center"> - </div>
+                                <div class="col-md-4">
+                                    {{receipt.locality}}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-3 col-md-offset-1">
+                                    Area
+                                </div>
+                                <div class="col-md-1" style="text-align:center"> - </div>
+                                <div class="col-md-4">
+                                    {{receipt.area}}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-3 col-md-offset-1">
+                                    City
+                                </div>
+                                <div class="col-md-1" style="text-align:center"> - </div>
+                                <div class="col-md-4">
+                                    {{receipt.city}}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-3 col-md-offset-1">
+                                    State
+                                </div>
+                                <div class="col-md-1" style="text-align:center"> - </div>
+                                <div class="col-md-4">
+                                    {{receipt.state}}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-3 col-md-offset-1">
+                                    Pincode
+                                </div>
+                                <div class="col-md-1" style="text-align:center"> - </div>
+                                <div class="col-md-4">
+                                    {{receipt.pincode}}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-3 col-md-offset-1">
+                                    Monthly Rent Amount
+                                </div>
+                                <div class="col-md-1" style="text-align:center"> - </div>
+                                <div class="col-md-4">
+                                    {{receipt.amount}}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-3 col-md-offset-1">
+                                    Reciept start date (YYYY-MM-DD)
+                                </div>
+                                <div class="col-md-1" style="text-align:center"> - </div>
+                                <div class="col-md-4">
+                                    {{receipt.startDate}}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-3 col-md-offset-1">
+                                    Reciept end date (YYYY-MM-DD)
+                                </div>
+                                <div class="col-md-1" style="text-align:center"> - </div>
+                                <div class="col-md-4">
+                                    {{receipt.endDate}}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-3 col-md-offset-1">
+                                    Email id
+                                </div>
+                                <div class="col-md-1" style="text-align:center"> - </div>
+                                <div class="col-md-4">
+                                    {{receipt.mail}}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-3 col-md-offset-1">
+                                    Mobile Number
+                                </div>
+                                <div class="col-md-1" style="text-align:center"> - </div>
+                                <div class="col-md-4">
+                                    {{receipt.mobile}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div> -->
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2">
+                            <h3 class="title text-center">RENT RECEIPT</h3>
+                            <div class="clearfix">&nbsp;</div>
+                            <p>Received sum of INR <strong>Rs. {{receipt.amount}}</strong> from <strong>{{receipt.name}}</strong> towards the rent of property located at
+                                <strong># {{receipt.hno}}, {{receipt.locality}}, {{receipt.area}}, {{receipt.state}} - {{receipt.pincode}}
+                                    </strong> for the period from <strong>{{receipt.startDate}}</strong> to <strong>{{receipt.endDate}}</strong>
+                            </p>
+                            <p class="small-text">(Affix Revenue Stamp of Rs.1/-)</p>
+                            <h5><b>{{receipt.owner}}</b> <span class="small-text">(Signature)</span></h5>
+                            <p class="small-text text-right">* T & C Apply www.Flexipay.in</p>
+                        </div>
+                        <div class="clearfix">&nbsp;</div>
+                        <div class="clearfix">&nbsp;</div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer" style="text-align:center">
+                <button type="submit" class="btn btn-success" (click)="downloadData()" data-dismiss="modal">Download</button>
+            </div>
+
+            <div class="clearfix">&nbsp;</div>
+        </div>
+    </div>
+</div>

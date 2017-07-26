@@ -1,0 +1,205 @@
+<div class="container">
+    <div class="row text-center">
+        <h1><br><b>Flexypay</b></h1>
+        <h5>for all your flexible payments</h5>
+    </div>
+</div>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="form-body">
+                <ul class="nav nav-tabs final-login">
+                    <li [class]="ActiveLoginTab"><a data-toggle="tab" href="#sectionA">Log In</a></li>
+                    <li [class]="ActiveRegistrationTab"><a data-toggle="tab" href="#sectionB">Register!</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="sectionA" [class]="ActiveLoginTabContent">
+
+                        <div class="innter-form">
+                            <div *ngIf="LoggedUserDetails.status==0" style="padding:10px 0px; color:red">{{LoggedUserDetails.message}}</div>
+                            <form class="sa-innate-form" method="post" #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)">
+                                <label>Email Address</label>
+                                <input type="text" name="username" ngModel>
+                                <label>Password</label>
+                                <input type="password" name="password" ngModel>
+                                <button class="btn btn-success" type="submit">Submit</button>
+                                <a class="pull-right" data-toggle="modal" href="#myModal" style="padding:15px 0">Forgot Password?</a>
+                            </form>
+                        </div>
+                        <!--<div class="social-login">
+                            <hr>
+                            <ul>
+                                <li><a href=""><i class="fa fa-facebook"></i> Facebook</a></li>
+                                <li><a href=""><i class="fa fa-google-plus"></i> Google+</a></li>
+                            </ul>
+                        </div>-->
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="sectionB" [class]="ActiveRegistrationTabContent">
+                        <div class="innter-form">
+
+                            <form class="sa-innate-form" #registerForm='ngForm' autocomplete="off" novalidate>
+
+                                <!--<label>Name <small>(as per the PAN card)</small></label>
+                                <input type="text" name="userName" #userName="ngModel" [(ngModel)]="registrationDetails.user_name">
+                                <div *ngIf="userName.touched &&(userName.errors || userName.invalid)">
+                                    <div *ngIf="userName.errors['required']">
+                                        <p class="error-text">Please enter name as per your PAN card</p>
+                                    </div>
+                                </div>-->
+
+                                <label>Email Address</label>
+                                <input type="text" name="email" #email="ngModel" [(ngModel)]="registrationDetails.email_id" pattern="^[A-Za-z0-9._%+-]{1,64}@(?:[A-Za-z0-9-]{1,63}\.){1,125}[A-Za-z]{2,63}$" required>
+                                <div *ngIf="email.touched &&(email.errors || email.invalid)">
+                                    <div *ngIf="email.errors['required']">
+                                        <p class="error-text">Please enter the email</p>
+                                    </div>
+                                    <div *ngIf="email.errors['pattern']">
+                                        <p class="error-text">Please enter a valid email</p>
+                                    </div>
+                                </div>
+
+                                <label>Mobile Number</label>
+                                <input type="text" name="mobile" pattern="^[0-9]{10}$" #mobile="ngModel" [(ngModel)]="registrationDetails.mobile" required>
+                                <div *ngIf="mobile.touched &&(mobile.errors || mobile.invalid)">
+                                    <div *ngIf="mobile.errors['required']">
+                                        <p class="error-text">Please enter the mobile number</p>
+                                    </div>
+                                    <div *ngIf="mobile.errors['pattern']">
+                                        <p class="error-text">Please enter 10 digits</p>
+                                    </div>
+                                </div>
+
+                                <label>Create Password</label>
+                                <input type="password" name="password" pattern="^.{6,}$" #password="ngModel" [(ngModel)]="registrationDetails.password" required>
+                                <div *ngIf="password.touched &&(password.errors || password.invalid)">
+                                    <div *ngIf="password.errors['required']">
+                                        <p class="error-text">Please enter the password</p>
+                                    </div>
+                                    <div *ngIf="password.errors['pattern']">
+                                        <p class="error-text">Minimum 6 charecters</p>
+                                    </div>
+                                </div>
+
+                                <!--<label>Confirm Password</label>
+                                <input type="password" name="cPassword" #cPassword="ngModel" [(ngModel)]="registrationDetails.CPassword" required>
+                                <div *ngIf="cPassword.touched &&(cPassword.errors || cPassword.invalid)">
+                                    <div *ngIf="cPassword.errors['required']">
+                                        <p class="error-text">Please confirm the password</p>
+                                    </div>
+                                </div>
+                                <div *ngIf="cPassword.touched && (registrationDetails.password != registrationDetails.CPassword)">
+                                    <p class="error-text">Both Passwords does not match</p>
+                                </div>-->
+
+                                <label>Referral Code <small>(If any)</small></label>
+                                <input type="text" name="referral" #referral="ngModel" [(ngModel)]="registrationDetails.referal_code">
+
+
+                                <!--<label>Date of Bith</label>
+                                <input type="date" name="dob" #dob="ngModel" [(ngModel)]="registrationDetails.dob" required>
+                                <div *ngIf="dob.touched && (dob.errors || dob.invalid)">
+                                    <div *ngIf="dob.errors['required']">
+                                        <p class="error-text">Please enter date of birth</p>
+                                    </div>
+                                </div>
+
+                                <label>Upload Pan Card</label>
+                                <input type="file" name="pancard_image" #pancardImage="ngModel" ngModel (change)="uploadFile($event)">
+                                <div *ngIf="pancardImage.errors">
+                                    <div *ngIf="pancardImage.errors['required'] || !registerForm.submitted">
+                                        <p class="error-text">Please upload your pan card</p>
+                                    </div>
+                                </div>
+
+                                <label>Pan Card Number</label>
+                                <input type="text" name="pancard" #pancard="ngModel" [(ngModel)]="registrationDetails.pancard" required>
+                                <div *ngIf="pancard.touched &&(pancard.errors || pancard.invalid)">
+                                    <div *ngIf="pancard.errors['required']">
+                                        <p class="error-text">Please enter the your pan card number</p>
+                                    </div>
+                                </div>-->
+
+                                <button [disabled]="registerForm.form['invalid']" data-target="#registrationModal" data-toggle="modal" (click)="registration()" type="submit" class="btn btn-success">Submit</button>
+                                <p>By clicking Join now, you agree to Flexypay User Agreement, Privacy Policy, and Cookie Policy.</p>
+                            </form>
+                        </div>
+                        <!--<div class="social-login">
+                            <p>- - - - - - - - - - - - - Register With - - - - - - - - - - - - - </p>
+                            <ul>
+                                <li><a href=""><i class="fa fa-facebook"></i> Facebook</a></li>
+                                <li><a href=""><i class="fa fa-google-plus"></i> Google+</a></li>
+                                <li><a href=""><i class="fa fa-twitter"></i> Twitter</a></li>
+                            </ul>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Registration Modal-->
+<div id="registrationModal" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Registration</h4>
+            </div>
+            <div class="modal-body" *ngIf="registrationResult.message==''">
+                <div class="text-center">
+                    <!--<h4>Registration Failed. Please try again Later</h4>-->
+                </div>
+            </div>
+            <div class="modal-body" *ngIf="registrationResult.message!=''">
+                <div class="text-center">
+                    <h4>{{registrationResult.message}}</h4>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center">
+                    <button class="btn btn-success" data-toggle="tab" data-dismiss="modal" href="#sectionA">Login</button>
+                </div>
+            </div>
+            <div class="clearfix">&nbsp;</div>
+        </div>
+    </div>
+</div>
+
+<!--Forgot Password Modal-->
+<div id="myModal" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <a class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+                <h4 class="modal-title">Forgot Password</h4>
+            </div>
+            <form #forgotPasswordForm="ngForm" novalidate>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input type="text" name="FPEmailVal" #FPEmailVal="ngModel" [(ngModel)]="FPEmail" class="form-control" placeholder="Enter Your Email id" required>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary" (click)="FPFormSubmit();forgotPasswordForm.form.reset();">Submit</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div *ngIf="FPformSubmitted">
+                        <!--<p class="text-center" *ngIf="FPSubmitResult.message==''">Please try again Later</p>-->
+                        <p class="text-center" *ngIf="FPSubmitResult.message!=''">{{FPSubmitResult.message}}</p>
+                        <div class="text-center">
+                            <button class="btn btn-success" data-dismiss="modal">Login</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="clearfix">&nbsp;</div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dalog -->
+</div>

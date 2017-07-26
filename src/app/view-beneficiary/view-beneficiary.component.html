@@ -1,0 +1,538 @@
+<div class="row">
+    <div class="col-lg-10 col-lg-offset-1 col-xs-12">
+
+
+        <!-- Main Content Starts -->
+        <!-- Copy and paste between "Main Content starts" & "Main Content Ends" comment area in your individual pages -->
+
+        <h3 class="heading-inn"><i class="fa fa-users" aria-hidden="true"></i>View Beneficiary</h3>
+
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+            <!--Bank Account Beneficiary-->
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a (click)="viewBeneficiaryBankAccounts()" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="more-less glyphicon glyphicon-plus"></i> Bank Account Beneficiary
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body well well-sm text-center">
+                        <h4>
+                            <span class="orange">Bank Account Beneficiary Details</span>
+                        </h4>
+                        <!-- Add Beneficiary Details Starts -->
+
+                        <div class="row">
+                            <div class="table-responsive">
+                                <p class="text-center">{{message}}</p>
+                                <table class="table table-hover" *ngIf="beneficiaryBankAccounts.status==1">
+                                    <thead>
+                                        <tr>
+                                            <th>Beneficiary Name</th>
+                                            <th>Account Number</th>
+                                            <th>Bank Name</th>
+                                            <th>IFSC Code</th>
+                                            <th>Action</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of beneficiaryBankAccounts.data">
+                                            <td>{{item.BeneficiaryName}}</td>
+                                            <td>{{item.AccountNumber}}</td>
+                                            <td>{{item.BankName}}</td>
+                                            <td>{{item.IFSCCode}}</td>
+                                            <td>
+                                                <button type="button" (click)="showViewModel(item.Id,'bankAccountBeneficiary')" class="btn btn-primary" data-toggle="modal" data-target="#ViewModal">
+                                                    View
+                                                </button>
+
+                                                <a type="button" [routerLink]="['/sendtobank/'+item.Id]" class="btn btn-success">Pay</a>
+                                            </td>
+                                            <td>
+                                                <button type="button" (click)="confirmDelete(item.Id, 'bankAccountBeneficiary')" class="btn btn-danger" data-toggle="modal" data-target="#DeleteConfirmation">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Add Beneficiary Details Ends -->
+                    </div>
+                </div>
+            </div>
+
+            <!--House Rent Beneficiary-->
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 class="panel-title">
+                        <a (click)="viewBeneficiaryHouseRent()" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <i class="more-less glyphicon glyphicon-plus"></i> House Rent Beneficiary
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body well well-sm text-center">
+                        <h4>
+                            <span class="orange">House Rent Beneficiary Details</span>
+                        </h4>
+                        <!-- Add Beneficiary Details Starts -->
+
+                        <div class="row">
+                            <div class="table-responsive">
+                                <p class="text-center">{{message}}</p>
+                                <table class="table table-hover" *ngIf="beneficiaryHouseRent.status==1">
+                                    <thead>
+                                        <tr>
+                                            <th>Beneficiary Name</th>
+                                            <th>Acount Number</th>
+                                            <th>Bank Name</th>
+                                            <th>IFSC Code</th>
+                                            <th>Action</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of beneficiaryHouseRent.data">
+                                            <td>{{item.BeneficiaryName}}</td>
+                                            <td>{{item.AccountNumber}}</td>
+                                            <td>{{item.BankName}}</td>
+                                            <td>{{item.IFSCCode}}</td>
+                                            <td>
+                                                <button type="button" (click)="showViewModel(item.Id,'houseRentBeneficiary')" class="btn btn-primary" data-toggle="modal" data-target="#ViewModal">
+                                                    View
+                                                </button>
+
+                                                <a type="button" class="btn btn-success" [routerLink]="['/houserent/'+item.Id]">Pay</a>
+                                            </td>
+                                            <td>
+                                                <button type="button" (click)="confirmDelete(item.Id, 'houseRentBeneficiary')" class="btn btn-danger" data-toggle="modal" data-target="#DeleteConfirmation">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!--<h4 *ngIf='beneficiaryHouseRent.status==0'>Internal Server Error.</h4>-->
+                            </div>
+                        </div>
+                        <!-- Add Beneficiary Details Ends -->
+                    </div>
+                </div>
+            </div>
+
+            <!--Maintenance Beneficiary-->
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                        <a (click)="viewBeneficiaryPropertyMaintenance()" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <i class="more-less glyphicon glyphicon-plus"></i> Maintenance Beneficiary
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body well well-sm text-center">
+                        <h4>
+                            <span class="orange">Maintenance Beneficiary Details</span>
+                        </h4>
+                        <!-- Add Beneficiary Details Starts -->
+
+                        <div class="row">
+                            <div class="table-responsive">
+                                <p class="text-center">{{message}}</p>
+                                <table class="table table-hover" *ngIf="beneficiaryPropertyMaintenance.status==1">
+                                    <thead>
+                                        <tr>
+                                            <th>Beneficiary Name</th>
+                                            <th>Acount Number</th>
+                                            <th>Bank Name</th>
+                                            <th>IFSC Code</th>
+                                            <th>Action</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of beneficiaryPropertyMaintenance.data">
+                                            <td>{{item.BeneficiaryName}}</td>
+                                            <td>{{item.AccountNumber}}</td>
+                                            <td>{{item.BankName}}</td>
+                                            <td>{{item.IFSCCode}}</td>
+                                            <td>
+                                                <button type="button" (click)="showViewModel(item.Id,'propertyMaintenanceBeneficiary')" class="btn btn-primary" data-toggle="modal" data-target="#ViewModal">
+                                                    View
+                                                </button>
+                                                <a type="button" class="btn btn-success" [routerLink]="['/maintenance/'+item.Id]">Pay</a>
+                                            </td>
+                                            <td>
+                                                <button type="button" (click)="confirmDelete(item.Id, 'propertyMaintenanceBeneficiary')" class="btn btn-danger" data-toggle="modal" data-target="#DeleteConfirmation">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!--<h4 *ngIf='beneficiaryPropertyMaintenance.status==0'>Internal Server Error.</h4>-->
+                            </div>
+                        </div>
+                        <!-- Add Beneficiary Details Ends -->
+                    </div>
+                </div>
+            </div>
+
+            <!--School Beneficiary-->
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingfour">
+                    <h4 class="panel-title">
+                        <a (click)="viewBeneficiarySchools()" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsefour" aria-expanded="false" aria-controls="collapseThree">
+                            <i class="more-less glyphicon glyphicon-plus"></i> School Beneficiary
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapsefour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfour">
+                    <div class="panel-body well well-sm text-center">
+                        <h4>
+                            <span class="orange">School Beneficiary Details</span>
+                        </h4>
+                        <!-- Add Beneficiary Details Starts -->
+
+                        <div class="row">
+                            <div class="table-responsive">
+                                <p class="text-center">{{message}}</p>
+                                <table class="table table-hover" *ngIf="beneficiarySchools.status==1">
+                                    <thead>
+                                        <tr>
+                                            <th>Beneficiary Name</th>
+                                            <th>Acount Number</th>
+                                            <th>Bank Name</th>
+                                            <th>IFSC Code</th>
+                                            <th>Action</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of beneficiarySchools.data">
+                                            <td>{{item.BeneficiaryName}}</td>
+                                            <td>{{item.AccountNumber}}</td>
+                                            <td>{{item.BankName}}</td>
+                                            <td>{{item.IFSCCode}}</td>
+                                            <td>
+                                                <button type="button" (click)="showViewModel(item.Id,'schoolsBeneficiary')" class="btn btn-primary" data-toggle="modal" data-target="#ViewModal">
+                                                    View
+                                                </button>
+
+                                                <a type="button" [routerLink]="['/schoolfee/'+item.Id]" class="btn btn-success">Pay</a>
+                                            </td>
+                                            <td>
+                                                <button type="button" (click)="confirmDelete(item.Id, 'schoolsBeneficiary')" class="btn btn-danger" data-toggle="modal" data-target="#DeleteConfirmation">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!--<h4 *ngIf='beneficiarySchools.status==0'>Internal Server Error.</h4>-->
+                            </div>
+                        </div>
+                        <!-- Add Beneficiary Details Ends -->
+                    </div>
+                </div>
+            </div>
+
+            <!--College Beneficiary-->
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                        <a (click)="viewBeneficiaryColleges()" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsefive" aria-expanded="false" aria-controls="collapseThree">
+                            <i class="more-less glyphicon glyphicon-plus"></i> College Beneficiary
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapsefive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body well well-sm text-center">
+                        <h4>
+                            <span class="orange">College Beneficiary Details</span>
+                        </h4>
+                        <!-- Add Beneficiary Details Starts -->
+
+                        <div class="row">
+                            <div class="table-responsive">
+                                <p class="text-center">{{message}}</p>
+                                <table class="table table-hover" *ngIf='beneficiaryColleges.status==1'>
+                                    <thead>
+                                        <tr>
+                                            <th>Beneficiary Name</th>
+                                            <th>Acount Number</th>
+                                            <th>Bank Name</th>
+                                            <th>IFSC Code</th>
+                                            <th>Action</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of beneficiaryColleges.data">
+                                            <td>{{item.BeneficiaryName}}</td>
+                                            <td>{{item.AccountNumber}}</td>
+                                            <td>{{item.BankName}}</td>
+                                            <td>{{item.IFSCCode}}</td>
+                                            <td>
+                                                <button type="button" (click)="showViewModel(item.Id,'collegeBeneficiary')" class="btn btn-primary" data-toggle="modal" data-target="#ViewModal">
+                                                    View
+                                                </button>
+
+                                                <a type="button" [routerLink]="['/collegefee/'+item.Id]" class="btn btn-success">Pay</a>
+
+                                                <!--<a type="button" class="btn btn-success" [routerLink]="['/maintenance/'+item.Id]">Pay</a>-->
+                                            </td>
+                                            <td>
+                                                <button type="button" (click)="confirmDelete(item.Id, 'collegeBeneficiary')" class="btn btn-danger" data-toggle="modal" data-target="#DeleteConfirmation">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!--<h4 *ngIf='beneficiaryColleges.status==0'>Internal Server Error.</h4>-->
+                            </div>
+                        </div>
+                        <!-- Add Beneficiary Details Ends -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main Content Ends -->
+
+
+    </div>
+</div>
+
+
+
+
+<!--Modal-->
+<div class="modal fade" id="ViewModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+                <h4 class="modal-title pull-left" id="myModalLabel">Beneficiary Details &nbsp;<button *ngIf="disableInput" type="button" (click)="showEditModel()" class="btn btn-primary text-left edit-btn">Edit</button></h4>
+
+            </div>
+
+
+            <form #editBankDetails="ngForm" novalidate>
+                <!--(ngSubmit)="editBankDetailsForm(editBankDetails.value)"-->
+                <div class="modal-body">
+
+                    <!-- View Details Starts -->
+                    <div class="row" *ngIf="disableInput">
+                        <div class="col-lg-6 bdr-rgt">
+                            <div class="col-md-12">
+                                <section>
+                                    <input class="effect-2" type="text" placeholder="Name as per the Bank" value="{{bankAccountDetails.bank_account_name}}" disabled>
+                                    <span class="focus-border"></span>
+                                </section>
+                            </div>
+                            <div class="col-md-12">
+                                <section>
+                                    <input class="effect-2" type="text" placeholder="Account Number" value="{{bankAccountDetails.bank_account_number}}" disabled>
+                                    <span class="focus-border"></span>
+                                </section>
+                            </div>
+                            <div class="col-md-12">
+                                <section>
+                                    <input class="effect-2" type="text" placeholder="Confirm Account Number" value="{{bankAccountDetails.bank_account_number}}" disabled>
+                                    <span class="focus-border"></span>
+                                </section>
+                            </div>
+
+                            <div class="col-md-12">
+                                <section>
+                                    <input class="effect-2" type="text" placeholder="Name of the Bank" value="{{bankAccountDetails.bank_name}}" disabled>
+                                    <span class="focus-border"></span>
+                                </section>
+                            </div>
+                            <div class="col-md-12">
+                                <section>
+                                    <input class="effect-2" type="text" placeholder="IFSC Code" value="{{bankAccountDetails.ifsc}}" disabled>
+                                    <span class="focus-border"></span>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-md-12">
+                                <section>
+                                    <input class="effect-2" type="text" placeholder="Nick Name" value="{{bankAccountDetails.nick_name}}" disabled>
+                                    <span class="focus-border"></span>
+                                </section>
+                            </div>
+                            <div class="col-md-12">
+                                <section>
+                                    <input class="effect-2" type="text" placeholder="Mail ID" value="{{bankAccountDetails.mail_id}}" disabled>
+                                    <span class="focus-border"></span>
+                                </section>
+                            </div>
+                            <div class="col-md-12">
+                                <section>
+                                    <input class="effect-2" type="text" placeholder="Phone Number" value="{{bankAccountDetails.mobile_number}}" disabled>
+                                    <span class="focus-border"></span>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- View Details Ends -->
+
+                    <!--Edit Details Start-->
+                    <div class="row" *ngIf="!disableInput">
+                        <div class="col-lg-6 bdr-rgt">
+                            <div class="col-md-12">
+                                <section>
+                                    <input class="effect-2" type="text" name="nameasPerBank" #nameasPerBank="ngModel" [(ngModel)]="bankAccountDetails.bank_account_name" placeholder="Name as per the Bank" required>
+                                    <span class="focus-border"></span>
+                                    <div *ngIf="(nameasPerBank.touched && nameasPerBank.errors) || nameasPerBank.invalid" class="">
+                                        <div *ngIf="nameasPerBank.errors['required']">
+                                            <p class="error-text">Please enter the name as per the bank records.</p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="col-md-12">
+                                <section>
+                                    <input class="effect-2" type="text" pattern="^[0-9]*$" name="accNo" #accNo="ngModel" [(ngModel)]="bankAccountDetails.bank_account_number" placeholder="Account Number" required>
+                                    <span class="focus-border"></span>
+                                    <div *ngIf="(accNo.touched && accNo.errors) || accNo.invalid" class="">
+                                        <div *ngIf="accNo.errors['required']">
+                                            <p class="error-text">Please enter the Account Number</p>
+                                        </div>
+                                        <div *ngIf="accNo.errors['pattern']">
+                                            <p class="error-text">Only numbers are allowed</p>
+                                        </div>
+                                    </div>
+
+                                </section>
+                            </div>
+                            <div class="col-md-12">
+                                <section>
+                                    <input class="effect-2" type="text" pattern="^[0-9]*$" name="accountNumberConfirm" #accountNumberConfirm="ngModel" ngModel placeholder="Confirm Account Number" required>
+                                    <span class="focus-border"></span>
+                                    <div *ngIf="(accountNumberConfirm.touched && accountNumberConfirm.errors) || accountNumberConfirm.invalid " class="">
+                                        <div *ngIf="accountNumberConfirm.errors['required']">
+                                            <p class="error-text">Please confirm the Account Number</p>
+                                        </div>
+                                        <div *ngIf="accountNumberConfirm.errors['pattern']">
+                                            <p class="error-text">Only numbers are allowed</p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div class="col-md-12">
+                                <section>
+                                    <input class="effect-2" type="text" name="bankName" #bankName="ngModel" [(ngModel)]="bankAccountDetails.bank_name" placeholder="Name of the Bank" required>
+                                    <span class="focus-border"></span>
+                                </section>
+                                <div *ngIf="(bankName.touched && bankName.errors) || bankName.invalid" class="">
+                                    <div *ngIf="bankName.errors['required']">
+                                        <p class="error-text">Please enter the Bank Name</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <section>
+                                    <input class="effect-2" type="text" name="ifscCode" #ifscCode="ngModel" [(ngModel)]="bankAccountDetails.ifsc" placeholder="IFSC Code" required>
+                                    <span class="focus-border"></span>
+                                    <div *ngIf="(ifscCode.touched && ifscCode.errors) || ifscCode.invalid" class="">
+                                        <div *ngIf="ifscCode.errors['required']">
+                                            <p class="error-text">Please enter the IFSC code of the Bank</p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-md-12">
+                                <section>
+                                    <!--<input class="effect-2" type="text" name="nickName" #nickName="ngModel" [(ngModel)]="bankAccountDetails.nick_name" placeholder="Nick Name" required>-->
+                                    <input class="effect-2" type="text" name="nickName" #nickName="ngModel" [(ngModel)]="bankAccountDetails.nick_name" placeholder="Nick Name" required>
+                                    <span class="focus-border"></span>
+                                    <div *ngIf="(nickName.touched && nickName.errors) || nickName.invalid" class="">
+                                        <div *ngIf="nickName.errors['required']">
+                                            <p class="error-text">Please enter the Nick Name</p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="col-md-12">
+                                <section>
+                                    <input class="effect-2" type="text" name="email" pattern="^[A-Za-z0-9._%+-]{1,64}@(?:[A-Za-z0-9-]{1,63}\.){1,125}[A-Za-z]{2,63}$" #email="ngModel" [(ngModel)]="bankAccountDetails.mail_id" placeholder="Mail ID" required>
+                                    <span class="focus-border"></span>
+                                    <div *ngIf="(email.touched && email.errors) || email.invalid" class="">
+                                        <div *ngIf="email.errors['required']">
+                                            <p class="error-text">Please enter the Email</p>
+                                        </div>
+                                        <div *ngIf="email.errors['pattern']">
+                                            <p class="error-text">Please enter a valid Email</p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="col-md-12">
+                                <section>
+                                    <input class="effect-2" type="text" pattern="^[0-9]{10}$" name="mobileNumber" #mobileNumber="ngModel" [(ngModel)]="bankAccountDetails.mobile_number" placeholder="Phone Number" required>
+                                    <span class="focus-border"></span>
+                                    <div *ngIf="(mobileNumber.touched && mobileNumber.errors) || (mobileNumber.invalid)" class="">
+                                        <div *ngIf="mobileNumber.errors['required']">
+                                            <p class="error-text">Please enter the Mobile Number</p>
+                                        </div>
+                                        <div *ngIf="mobileNumber.errors['pattern']">
+                                            <p class="error-text">Please enter 10 digits</p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Edit Details End-->
+
+
+                </div>
+                <div class="modal-footer">
+                    <span *ngIf="editBankDetails.form['invalid']">Please fill all fields to enable buttons</span>
+                    <button type="submit" [disabled]="editBankDetails.form['invalid']" (click)="editBankDetailsForm(bankAccountDetails.receivedDataType)" data-dismiss="modal" class="btn btn-primary" tooltip="This will be enabled once all the fields are filled up">Save & Exit</button>
+                    <!--data-dismiss="modal" aria-hidden="true"-->
+                    <button type="submit" [disabled]="editBankDetails.form['invalid']" (click)="saveAndPay(bankAccountDetails.receivedDataType)" data-dismiss="modal" class="btn btn-success" title="Both save and pay">Save & Pay</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Modal - Delete Confirmation-->
+<div class="modal fade" id="DeleteConfirmation" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+                <h4 class="modal-title pull-left" id="myModalLabel">Delete &nbsp;</h4>
+            </div>
+
+            <!--(ngSubmit)="editBankDetailsForm(editBankDetails.value)"-->
+            <div class="modal-body">
+                <p>Are you sure you want to delete this record?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" (click)="deleteRecord(performDelete.id, performDelete.accountType)" data-dismiss="modal" class="btn btn-danger">Delete</button>
+                <!--data-dismiss="modal" aria-hidden="true"-->
+                <button type="submit" class="btn btn-success" data-dismiss="modal" aria-hidden="true">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

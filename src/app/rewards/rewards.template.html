@@ -1,0 +1,42 @@
+<div *ngIf="UserStatus==1" class="row" style="text-align:center">
+    You have not verified your pancard document. Please upload it here <a [routerLink]="['/profile']" class="btn btn-danger">Upload KYC </a>
+</div>
+<div *ngIf="UserStatus==6" class="row" style="text-align:center">
+    Your pancard is pending for approval. Till then you cannot do this operation.
+</div>
+
+<div>
+    <!-- Your Content goes Here -->
+    <div>
+        <div class="form-group">
+            <div>
+                <label class="pull-left"><h3 style="line-height: 0.1;padding-right: 20px;"><span class="orange"><b>Rewards</b></span></h3></label><br><br>
+            </div>
+        </div>
+    </div>
+    <div style="padding:5%;background:rgba(255,255,255,0.9)">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Points Credited</th>
+                        <th>Points Debited</th>
+                        <th>Reference / Transaction Id</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <tr *ngFor="let item of rewardsList">
+                        <td>12-03-2017</td>
+                        <td>{{item.credit}}</td>
+                        <td>{{item.debit}}</td>
+                        <td>
+                            <ng-container *ngIf="item.referalincome_userid!=0">{{item.referalincome_userid}}</ng-container>
+                            <ng-container *ngIf="item.transaction_code!=0">{{item.transaction_code}}</ng-container>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

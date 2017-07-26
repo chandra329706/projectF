@@ -1,0 +1,106 @@
+<div *ngIf="UserStatus==1 && IsMenuActive==1" class="row" style="text-align:center">
+    You have not verified your pancard document. Please upload it here <a [routerLink]="['/profile']" class="btn btn-danger">Upload KYC </a>
+</div>
+<div *ngIf="UserStatus==6 && IsMenuActive==1" class="row" style="text-align:center">
+    Your pancard is pending for approval. Till then you cannot do this operation.
+</div>
+<div *ngIf="IsMenuActive==1">
+    <div>
+    <div class="form-group">
+        <div>
+            <label class="pull-left"><h3 style="line-height: 0.1;padding-right: 20px;"><span class="orange"><b>Request Payment</b></span></h3></label><br><br>
+        </div>
+    </div>
+</div>
+<div style="padding:5%;background:rgba(255,255,255,0.9)">
+    <div class="row" style="text-align:center; color: green; font-size:20px"*ngIf="ResponseMessage"><b>{{ResponseMessage}}</b></div>
+    <form #requestPayment="ngForm">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-1">
+            <div class="col-xs-12">
+                <section>
+                    <input class="effect-2" type="text" placeholder="Name" name="user_name" #userName="ngModel" ngModel required>
+                    <span class="focus-border"></span>
+                    <div *ngIf="userName.errors && userName.touched" style="color:red">
+                        <span [hidden]="!userName.errors['required']">Please enter user name</span>
+                    </div>
+                </section>
+            </div>
+            <div class="col-xs-12">
+                <section>
+                    <input class="effect-2" type="text" placeholder="Mail ID" name="mail_id" #mailId="ngModel" ngModel required pattern="^[A-Za-z0-9._%+-]{1,64}@(?:[A-Za-z0-9-]{1,63}\.){1,125}[A-Za-z]{2,63}$">
+                    <span class="focus-border"></span>
+                     <div *ngIf="mailId.errors && mailId.touched" style="color:red">
+                        <span [hidden]="!mailId.errors['required']">Please enter your email</span>
+                        <span [hidden]="!mailId.errors['pattern']">Please enter valid email</span>
+                    </div>
+                </section>
+            </div>
+            <div class="col-xs-12">
+                <section>
+                    <input class="effect-2" type="text" placeholder="Phone Number" name="phone_number" #phoneNumber="ngModel" ngModel required maxlength="10" pattern="^[0-9]{10}$">
+                    <span class="focus-border"></span>
+                    <div *ngIf="phoneNumber.errors && phoneNumber.touched" style="color:red">
+                        <span [hidden]="!phoneNumber.errors['required']">Please enter phone number</span>
+                        <span [hidden]="!phoneNumber.errors['pattern']">Please enter valid phone number</span>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+        <div class="col-md-4 col-md-offset-1">
+            <div class="col-xs-12">
+                <section>
+                    <input class="effect-2" type="text" placeholder="Amount" name="amount" #amount="ngModel" ngModel required>
+                    <span class="focus-border"></span>
+                     <div *ngIf="amount.errors && amount.touched" style="color:red">
+                        <span [hidden]="!amount.errors['required']">Please enter amount</span>
+                    </div>
+                </section>
+            </div>
+            <div class="col-xs-12">
+                <section>
+                    <input class="effect-2" type="text" placeholder="Purpose" name="purpose" #purpose="ngModel" ngModel required>
+                    <span class="focus-border"></span>
+                    <div *ngIf="purpose.errors && purpose.touched" style="color:red">
+                        <span [hidden]="!purpose.errors['required']">Please enter purpose</span>
+                    </div>
+                </section>
+            </div>
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <div class="fileUpload btn btn-primary" style="margin:10px 0 0 0">
+                        <span>UPLOAD ANY DOCUMENT LIKE INVOICE</span>
+                        <input type="file" class="upload" (change)="uploadFile($event)" accept=".pdf,.doc,.docx,.jpeg,.png" name="document"/>
+                    </div>
+                    <small>document_filename.pdf  <span class="orange">(file size limits 500kb, only pdf, doc, png, jpg )</span></small>
+                </div>
+               
+                
+            </div>
+        </div>
+    </div>
+     <div class="row">
+                <div class="well well-sm text-center">
+                     <label><h4><span class="orange"><b>Who will pay the processing fee</b></span></h4></label>
+                     <form>
+                      <label class="radio-inline">
+                        <input type="radio" name="optradio" [checked]='true' [(ngModel)]="selectedPayee" [value]="1">Request Sender
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" name="optradio" [(ngModel)]="selectedPayee" [value]="2">Request Reciever
+                      </label>
+                    </form>  
+                </div>
+              </div>
+    <div class="clearfix"></div>
+    <div class="row text-center">
+        <button type="button" [disabled]="!requestPayment.form.valid || Disabled " class="btn btn-success custom-button" (click)="InitiateRequestPayment(requestPayment)">Send Request</button>
+    </div>
+    <!-- Your Content Ends Here -->
+    </form>
+</div>
+</div>
+<div *ngIf="IsMenuActive==0" class="row" style="text-align:center">
+   <span style="font-size:25px; "><b> This service is temporarily disabled... Please try after some time</b></span>
+</div>

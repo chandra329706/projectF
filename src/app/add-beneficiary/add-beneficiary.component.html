@@ -1,0 +1,1170 @@
+<div *ngIf="UserStatus==1" class="row" style="text-align:center">
+    You have not verified your pancard document. Please upload it here <a [routerLink]="['/profile']" class="btn btn-danger">Upload KYC </a>
+</div>
+<div *ngIf="UserStatus==6" class="row" style="text-align:center">
+    Your pancard is pending for approval. Till then you can add any beneficiary.
+</div>
+<div class="row">
+    <!-- Main Content Starts -->
+
+    <div class="col-lg-10 col-lg-offset-1 col-xs-12">
+        <h3 class="heading-inn"><i class="fa fa-user-plus" aria-hidden="true"></i>Add Beneficiary</h3>
+
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+            <!--Bank Account Panel-->
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="more-less glyphicon glyphicon-plus"></i> Add Bank Account
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body well well-sm text-center">
+                        <h4 class="orange">
+                            Add Bank Account - Beneficiary Details
+                        </h4><br>
+                        <!-- Add Beneficiary Details Starts -->
+                        <div>
+                            <form #addBankAccountForm="ngForm" novalidate>
+                                <div class="row">
+                                    <div class="col-lg-6 bdr-rgt">
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="BAnameAsPerBank" #BAnameAsPerBank="ngModel" [(ngModel)]="addBankAccount.bank_account_name" placeholder="Name as per bank" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="BAnameAsPerBank.touched && (BAnameAsPerBank.invalid || BAnameAsPerBank.errors)">
+                                                    <div *ngIf="BAnameAsPerBank.errors['required']">
+                                                        <p class="error-text">Please enter the name as per the bank records</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" pattern="^[0-9]*$" name="BAaccNo" #BAaccNo="ngModel" [(ngModel)]="addBankAccount.bank_account_number" placeholder="Account Number" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="BAaccNo.touched && (BAaccNo.errors || BAaccNo.invalid)">
+                                                    <div *ngIf="BAaccNo.errors['required']">
+                                                        <p class="error-text">Please enter the Account Number</p>
+                                                    </div>
+                                                    <div *ngIf="BAaccNo.errors['pattern']">
+                                                        <p class="error-text">Only numbers are allowed</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" pattern="^[0-9]*$" name="BAaccountNumberConfirm" #BAaccountNumberConfirm="ngModel" [(ngModel)]="addBankAccount.confirm_bank_account_number" placeholder="Confirm Account Number" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="BAaccountNumberConfirm.touched && (addBankAccount.bank_account_number != addBankAccount.confirm_bank_account_number)">
+                                                    <p class="error-text">Account Numbers does not match</p>
+                                                </div>
+                                                <div *ngIf="BAaccountNumberConfirm.touched && (BAaccountNumberConfirm.errors || BAaccountNumberConfirm.invalid)">
+                                                    <p class="error-text">Please confirm the account number</p>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="BAbankName" #BAbankName="ngModel" [(ngModel)]="addBankAccount.bank_name" placeholder="Name of the Bank" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="BAbankName.touched && (BAbankName.errors || BAbankName.invalid)">
+                                                    <div *ngIf="BAbankName.errors['required']">
+                                                        <p class="error-text">Please enter the bank name</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="BAifsc" #BAifsc="ngModel" [(ngModel)]="addBankAccount.ifsc" placeholder="IFSC Code" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="BAifsc.touched && (BAifsc.errors || BAifsc.invalid)">
+                                                    <div *ngIf="BAifsc.errors['required']">
+                                                        <p class="error-text">Please enter IFSC</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="BAnickname" #BAnickname="ngModel" [(ngModel)]="addBankAccount.nick_name" placeholder="Nick Name" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="BAnickname.touched && (BAnickname.errors || BAnickname.invalid)">
+                                                    <div *ngIf="BAnickname.errors['required']">
+                                                        <p class="error-text">Please enter nick name</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="BAemail" pattern="^[\w._%+-]{1,64}@(?:[A-Za-z0-9-]{1,63}\.){1,125}[A-Za-z]{2,63}$" #BAemail="ngModel" [(ngModel)]="addBankAccount.mail_id" placeholder="Email" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="BAemail.touched && (BAemail.errors || BAemail.invalid)" class="">
+                                                    <div *ngIf="BAemail.errors['required']">
+                                                        <p class="error-text">Please enter the Email</p>
+                                                    </div>
+                                                    <div *ngIf="BAemail.errors['pattern']">
+                                                        <p class="error-text">Please enter a valid Email</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" pattern="^[0-9]{10}$" name="BAphone" #BAphone="ngModel" [(ngModel)]="addBankAccount.mobile_number" placeholder="Phone Number" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="BAphone.touched && (BAphone.errors || BAphone.invalid)">
+                                                    <div *ngIf="BAphone.errors['required']">
+                                                        <p class="error-text">Please enter the phone number</p>
+                                                    </div>
+                                                    <div *ngIf="BAphone.errors['pattern']">
+                                                        <p class="error-text">Please enter 10 digits</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <button type="button" [disabled]="addBankAccountForm.form['invalid'] || UserStatus!=2" data-target="#confirmationModal" data-toggle="modal" (click)="addBankAccounts()" class="btn btn-primary custom-button">Save & Exit</button>
+                                <button type="button" [disabled]="addBankAccountForm.form['invalid'] || UserStatus!=2" (click)="addBankAccountsAndPay()" class="btn btn-success custom-button">Save & Pay</button>
+                            </form>
+                        </div>
+
+                        <!-- Add Beneficiary Details Ends -->
+                    </div>
+                </div>
+            </div>
+
+            <!--House Rent Panel-->
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <i class="more-less glyphicon glyphicon-plus"></i> Add a Property to pay house rent
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body well well-sm text-center">
+                        <h4 class="orange">
+                            Add a Property to pay House Rent - Beneficiary Details
+                        </h4>
+                        <!-- Add Beneficiary Details Starts -->
+                        <div>
+                            <form #addHouseRentPropertyForm="ngForm" novalidate>
+                                <div class="row"> <br>
+                                    <div class="col-lg-6 bdr-rgt">
+                                        <div class="col-md-12">
+                                            <select class="cs-select cs-skin-elastic" name="rentPropertyType" #rentPropertyType="ngModel" [(ngModel)]="addHouseRentProperty.property_type" required>
+                                                <option disabled>Type of Property</option>
+                                                <option value="1">Residential</option>
+                                                <option value="2">Commercial</option>
+                                            </select>
+                                            <div *ngIf="rentPropertyType.touched && (rentPropertyType.invalid || rentPropertyType.errors)">
+                                                <div *ngIf="rentPropertyType.errors['required']">
+                                                    <p class="error-text">Please select the property type</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="propertyNickName" #propertyNickName="ngModel" [(ngModel)]="addHouseRentProperty.nick_name" placeholder="Property Nick Name" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="propertyNickName.touched && (propertyNickName.invalid || propertyNickName.errors)">
+                                                    <div *ngIf="propertyNickName.errors['required']">
+                                                        <p class="error-text">Please enter the property nick name</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="houseNumber" #houseNumber="ngModel" [(ngModel)]="addHouseRentProperty.house_number" placeholder="Door / House / Flat #" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="houseNumber.touched && (houseNumber.invalid || houseNumber.errors)">
+                                                    <div *ngIf="houseNumber.errors['required']">
+                                                        <p class="error-text">Please enter Door / House / Flat number</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="locality" #locality="ngModel" [(ngModel)]="addHouseRentProperty.locality" placeholder="Locality / Landmark" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="locality.touched && (locality.invalid || locality.errors)">
+                                                    <div *ngIf="locality.errors['required']">
+                                                        <p class="error-text">Please enter the locality</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="area" #area="ngModel" [(ngModel)]="addHouseRentProperty.area" placeholder="Area" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="houseNumber.touched && (houseNumber.invalid || houseNumber.errors)">
+                                                    <div *ngIf="houseNumber.errors['required']">
+                                                        <p class="error-text">Please enter Door / House / Flat number</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="city" #city="ngModel" [(ngModel)]="addHouseRentProperty.city" placeholder="City" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="city.touched && (city.invalid || city.errors)">
+                                                    <div *ngIf="city.errors['required']">
+                                                        <p class="error-text">Please enter the city</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="pincode" #pincode="ngModel" pattern="^[0-9]*$" [(ngModel)]="addHouseRentProperty.pincode" placeholder="Pincode" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="pincode.touched && (pincode.invalid || pincode.errors)">
+                                                    <div *ngIf="pincode.errors['required']">
+                                                        <p class="error-text">Please enter the Pincode</p>
+                                                    </div>
+                                                    <div *ngIf="pincode.errors['pattern']">
+                                                        <p class="error-text">Please enter only numbers</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="state" #state="ngModel" [(ngModel)]="addHouseRentProperty.state" placeholder="State" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="state.touched && (state.invalid || state.errors)">
+                                                    <div *ngIf="state.errors['required']">
+                                                        <p class="error-text">Please enter the state</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <form class="form-inline">
+                                                    <div class="form-group pull-left">
+                                                        <label for="Date" style="padding:10px 0">Remainder date : </label>
+                                                        <select style="width:auto" name="reminderDate" #reminderDate="ngModel" [(ngModel)]="addHouseRentProperty.reminder_day" required>
+                                                            <option value="" disabled selected>Date</option>
+                                                            <option *ngFor="let i of dates" [ngValue]="i">{{i}}</option>
+                                                        </select>
+                                                        <div *ngIf="reminderDate.touched && (reminderDate.invalid || reminderDate.errors)">
+                                                            <div *ngIf="reminderDate.errors['required']">
+                                                                <p class="error-text">Please select the date</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </section>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="ownerName" #ownerName="ngModel" [(ngModel)]="addHouseRentProperty.owner_name" placeholder="Owner Name" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="ownerName.touched && (ownerName.invalid || ownerName.errors)">
+                                                    <div *ngIf="ownerName.errors['required']">
+                                                        <p class="error-text">Please enter the Owner name</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="nameAsPerBank" #nameAsPerBank="ngModel" [(ngModel)]="addHouseRentProperty.bank_account_name" placeholder="Name as per the Bank" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="nameAsPerBank.touched && (nameAsPerBank.invalid || nameAsPerBank.errors)">
+                                                    <div *ngIf="nameAsPerBank.errors['required']">
+                                                        <p class="error-text">Please enter the name as per your bank account</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="ifsc" #ifsc="ngModel" [(ngModel)]="addHouseRentProperty.ifsc" placeholder="IFSC Code" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="ifsc.touched && (ifsc.invalid || ifsc.errors)">
+                                                    <div *ngIf="ifsc.errors['required']">
+                                                        <p class="error-text">Please enter IFSC code</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="bankName" #bankName="ngModel" [(ngModel)]="addHouseRentProperty.bank_name" placeholder="Name of the Bank" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="bankName.touched && (bankName.invalid || bankName.errors)">
+                                                    <div *ngIf="bankName.errors['required']">
+                                                        <p class="error-text">Please enter the bank name</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" pattern="^[0-9]*$" name="accNo" #accNo="ngModel" [(ngModel)]="addHouseRentProperty.bank_account_number" placeholder="Account Number" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="accNo.touched && (accNo.errors || accNo.invalid)">
+                                                    <div *ngIf="accNo.errors['required']">
+                                                        <p class="error-text">Please enter the Account Number</p>
+                                                    </div>
+                                                    <div *ngIf="accNo.errors['pattern']">
+                                                        <p class="error-text">Only numbers are allowed</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" pattern="^[0-9]*$" name="accountNumberConfirm" #accountNumberConfirm="ngModel" [(ngModel)]="addHouseRentProperty.confirm_bank_account_number" placeholder="Confirm Account Number" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="accountNumberConfirm.touched && (addHouseRentProperty.bank_account_number != addHouseRentProperty.confirm_bank_account_number)">
+                                                    <p class="error-text">Account Numbers does not match</p>
+                                                </div>
+                                                <div *ngIf="accountNumberConfirm.touched && (accountNumberConfirm.errors || accountNumberConfirm.invalid)">
+                                                    <p class="error-text">Please confirm the account number</p>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="email" pattern="^[A-Za-z0-9._%+-]{1,64}@(?:[A-Za-z0-9-]{1,63}\.){1,125}[A-Za-z]{2,63}$" #email="ngModel" [(ngModel)]="addHouseRentProperty.owner_mail_id" placeholder="Email" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="email.touched && (email.errors || email.invalid)" class="">
+                                                    <div *ngIf="email.errors['required']">
+                                                        <p class="error-text">Please enter the Email</p>
+                                                    </div>
+                                                    <div *ngIf="email.errors['pattern']">
+                                                        <p class="error-text">Please enter a valid Email</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" pattern="^[0-9]{10}$" name="phone" #phone="ngModel" [(ngModel)]="addHouseRentProperty.owner_mobile_number" placeholder="Phone Number" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="phone.touched && (phone.errors || phone.invalid)">
+                                                    <div *ngIf="phone.errors['required']">
+                                                        <p class="error-text">Please enter the phone number</p>
+                                                    </div>
+                                                    <div *ngIf="phone.errors['pattern']">
+                                                        <p class="error-text">Please enter 10 digits</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <section>
+                                    <div class="inline-group text-left" style="padding:20px">
+                                        <label class="checkbox">
+                                            <input type="checkbox" name="TnCVal" #TnCVal="ngModel" [(ngModel)]="TnC" checked=""><small>I Shall not raise any kind of liability or its associates, if the above details are found to be untrue or incorrect. Also, I declare that the above bank details do not belong to me.</small></label>
+                                        <div *ngIf="TnCVal.touched && (TnCVal.errors || TnCVal.invalid)">
+                                            <div *ngIf="TnCVal.errors['required']">
+                                                <p class="error-text">Please accept the Terms & Conditions</p>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="TnCVal.touched && (TnC == false)">
+                                            <p class="error-text">Please accept the Terms & Conditions</p>
+                                        </div>
+                                    </div>
+                                </section>
+                                <br>
+                                <button type="button" [disabled]="(TnC==false) || (addHouseRentPropertyForm.form['invalid'] ||UserStatus!=2)" data-target="#confirmationModal" data-toggle="modal" (click)="addHouseRentProperties()" class="btn btn-primary custom-button" data-dismiss="modal">Save & Exit</button>
+                                <button type="button" [disabled]="(TnC==false) || (addHouseRentPropertyForm.form['invalid'] || UserStatus!=2)" (click)="addHouseRentPropertiesAndPay()" class="btn btn-success custom-button">Save & Pay</button>
+                            </form>
+                        </div>
+
+                        <!-- Add Beneficiary Details Ends -->
+                    </div>
+                </div>
+            </div>
+
+            <!--Monthly Maintenance Panel-->
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <i class="more-less glyphicon glyphicon-plus"></i> Add your property for paying monthly Maintenance
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body well well-sm text-center">
+                        <h4 class="orange">
+                            Add your property for paying monthly Maintenance - Beneficiary Details
+                        </h4>
+                        <!-- Add Beneficiary Details Starts -->
+                        <div>
+                            <form #addMonthlyMaintenanceForm="ngForm" novalidate>
+                                <div class="row"> <br>
+                                    <div class="col-lg-6 bdr-rgt">
+                                        <div class="col-md-12">
+                                            <select class="cs-select cs-skin-elastic" name="maintRentType" #maintRentType="ngModel" [(ngModel)]="monthlyMaintenanceProperty.property_type" required>
+                                                <option disabled>Type of Property</option>
+                                                <option value="1">Residential</option>
+                                                <option value="2">Commercial</option>
+                                            </select>
+                                            <div *ngIf="maintRentType.touched && (maintRentType.invalid || maintRentType.errors)">
+                                                <div *ngIf="maintRentType.errors['required']">
+                                                    <p class="error-text">Please select the property type</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="maintpropertyNickName" #maintpropertyNickName="ngModel" [(ngModel)]="monthlyMaintenanceProperty.nick_name" placeholder="Property Nick Name" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="maintpropertyNickName.touched && (maintpropertyNickName.invalid || maintpropertyNickName.errors)">
+                                                    <div *ngIf="maintpropertyNickName.errors['required']">
+                                                        <p class="error-text">Please enter the property nick name</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="mainthouseNumber" #mainthouseNumber="ngModel" [(ngModel)]="monthlyMaintenanceProperty.house_number" placeholder="Door / House / Flat #" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="mainthouseNumber.touched && (mainthouseNumber.invalid || mainthouseNumber.errors)">
+                                                    <div *ngIf="mainthouseNumber.errors['required']">
+                                                        <p class="error-text">Please enter Door / House / Flat number</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="maintlocality" #maintlocality="ngModel" [(ngModel)]="monthlyMaintenanceProperty.locality" placeholder="Locality / Landmark" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="maintlocality.touched && (maintlocality.invalid || maintlocality.errors)">
+                                                    <div *ngIf="maintlocality.errors['required']">
+                                                        <p class="error-text">Please enter the locality</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="maintarea" #maintarea="ngModel" [(ngModel)]="monthlyMaintenanceProperty.area" placeholder="Area" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="maintarea.touched && (maintarea.invalid || maintarea.errors)">
+                                                    <div *ngIf="maintarea.errors['required']">
+                                                        <p class="error-text">Please enter the area</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="maintcity" #maintcity="ngModel" [(ngModel)]="monthlyMaintenanceProperty.city" placeholder="City" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="maintcity.touched && (maintcity.invalid || maintcity.errors)">
+                                                    <div *ngIf="maintcity.errors['required']">
+                                                        <p class="error-text">Please enter the city</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="maintpincode" #maintpincode="ngModel" pattern="^[0-9]*$" [(ngModel)]="monthlyMaintenanceProperty.pincode" placeholder="Pincode" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="maintpincode.touched && (maintpincode.invalid || maintpincode.errors)">
+                                                    <div *ngIf="maintpincode.errors['required']">
+                                                        <p class="error-text">Please enter the Pincode</p>
+                                                    </div>
+                                                    <div *ngIf="maintpincode.errors['pattern']">
+                                                        <p class="error-text">Please enter only numbers</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="maintstate" #maintstate="ngModel" [(ngModel)]="monthlyMaintenanceProperty.state" placeholder="State" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="maintstate.touched && (maintstate.invalid || maintstate.errors)">
+                                                    <div *ngIf="maintstate.errors['required']">
+                                                        <p class="error-text">Please enter the state</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <form class="form-inline">
+                                                    <div class="form-group pull-left">
+                                                        <label for="Date" style="padding:10px 0">Remainder date : </label>
+                                                        <select style="width:auto" name="maintreminderDate" #maintreminderDate="ngModel" [(ngModel)]="monthlyMaintenanceProperty.reminder_day" required>
+                                                            <option value="" disabled selected>Date</option>
+                                                            <option *ngFor="let i of dates" [ngValue]="i">{{i}}</option>
+                                                        </select>
+                                                        <div *ngIf="maintreminderDate.touched && (maintreminderDate.invalid || maintreminderDate.errors)">
+                                                            <div *ngIf="maintreminderDate.errors['required']">
+                                                                <p class="error-text">Please select the date</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </section>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="maintownerName" #maintownerName="ngModel" [(ngModel)]="monthlyMaintenanceProperty.owner_name" placeholder="Owner Name" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="maintownerName.touched && (maintownerName.invalid || maintownerName.errors)">
+                                                    <div *ngIf="maintownerName.errors['required']">
+                                                        <p class="error-text">Please enter the Owner name</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="maintnameAsPerBank" #maintnameAsPerBank="ngModel" [(ngModel)]="monthlyMaintenanceProperty.bank_account_name" placeholder="Name as per the Bank" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="maintnameAsPerBank.touched && (maintnameAsPerBank.invalid || maintnameAsPerBank.errors)">
+                                                    <div *ngIf="maintnameAsPerBank.errors['required']">
+                                                        <p class="error-text">Please enter the name as per your bank account</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="maintifsc" #maintifsc="ngModel" [(ngModel)]="monthlyMaintenanceProperty.ifsc" placeholder="IFSC Code" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="maintifsc.touched && (maintifsc.invalid || maintifsc.errors)">
+                                                    <div *ngIf="maintifsc.errors['required']">
+                                                        <p class="error-text">Please enter IFSC code</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="maintbankName" #maintbankName="ngModel" [(ngModel)]="monthlyMaintenanceProperty.bank_name" placeholder="Name of the Bank" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="maintbankName.touched && (maintbankName.invalid || maintbankName.errors)">
+                                                    <div *ngIf="maintbankName.errors['required']">
+                                                        <p class="error-text">Please enter the bank name</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" pattern="^[0-9]*$" name="maintaccNo" #maintaccNo="ngModel" [(ngModel)]="monthlyMaintenanceProperty.bank_account_number" placeholder="Account Number" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="maintaccNo.touched && (maintaccNo.errors || maintaccNo.invalid)">
+                                                    <div *ngIf="maintaccNo.errors['required']">
+                                                        <p class="error-text">Please enter the Account Number</p>
+                                                    </div>
+                                                    <div *ngIf="maintaccNo.errors['pattern']">
+                                                        <p class="error-text">Only numbers are allowed</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" pattern="^[0-9]*$" name="maintaccountNumberConfirm" #maintaccountNumberConfirm="ngModel" [(ngModel)]="monthlyMaintenanceProperty.confirm_bank_account_number" placeholder="Confirm Account Number" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="maintaccountNumberConfirm.touched && (monthlyMaintenanceProperty.bank_account_number != monthlyMaintenanceProperty.confirm_bank_account_number)">
+                                                    <p class="error-text">Account Numbers does not match</p>
+                                                </div>
+                                                <div *ngIf="maintaccountNumberConfirm.touched && (maintaccountNumberConfirm.errors || maintaccountNumberConfirm.invalid)">
+                                                    <p class="error-text">Please confirm the account number</p>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="maintemail" pattern="^[A-Za-z0-9._%+-]{1,64}@(?:[A-Za-z0-9-]{1,63}\.){1,125}[A-Za-z]{2,63}$" #maintemail="ngModel" [(ngModel)]="monthlyMaintenanceProperty.owner_email_id" placeholder="Email" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="maintemail.touched && (maintemail.errors || maintemail.invalid)" class="">
+                                                    <div *ngIf="maintemail.errors['required']">
+                                                        <p class="error-text">Please enter the Email</p>
+                                                    </div>
+                                                    <div *ngIf="maintemail.errors['pattern']">
+                                                        <p class="error-text">Please enter a valid Email</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" pattern="^[0-9]{10}$" name="maintphone" #maintphone="ngModel" [(ngModel)]="monthlyMaintenanceProperty.owner_mobile" placeholder="Phone Number" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="maintphone.touched && (maintphone.errors || maintphone.invalid)">
+                                                    <div *ngIf="maintphone.errors['required']">
+                                                        <p class="error-text">Please enter the phone number</p>
+                                                    </div>
+                                                    <div *ngIf="maintphone.errors['pattern']">
+                                                        <p class="error-text">Please enter 10 digits</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <br>
+                                <button type="button" [disabled]="(addMonthlyMaintenanceForm.form['invalid'] || UserStatus!=2)" data-target="#confirmationModal" data-toggle="modal" (click)="addMonthlyMaintenanceProperties()" class="btn btn-primary custom-button" data-dismiss="modal">Save & Exit</button>
+                                <button type="button" [disabled]="(addMonthlyMaintenanceForm.form['invalid'] || UserStatus!=2)" (click)="addMonthlyMaintenancePropertiesAndPay()" class="btn btn-success custom-button">Save & Pay</button>
+                            </form>
+                        </div>
+
+                        <!-- Add Beneficiary Details Ends -->
+                    </div>
+                </div>
+            </div>
+
+            <!--School Panel-->
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingfour">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsefour" aria-expanded="false" aria-controls="collapseThree">
+                            <i class="more-less glyphicon glyphicon-plus"></i> Add a School
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapsefour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfour">
+                    <div class="panel-body well well-sm text-center">
+                        <h4 class="orange">
+                            Add a School - Beneficiary Details
+                        </h4>
+                        <!-- Add Beneficiary Details Starts -->
+                        <div>
+                            <form #addSchoolForm="ngForm" novalidate>
+                                <div class="row"><br>
+                                    <div class="col-lg-4 bdr-rgt">
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="sclNickName" #sclNickName="ngModel" [(ngModel)]="addSchool.nick_name" placeholder="Nick Name of the School" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="sclNickName.touched && (sclNickName.invalid || sclNickName.errors)">
+                                                    <div *ngIf="sclNickName.errors['required']">
+                                                        <p class="error-text">Please enter the School nick name</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="sclName" #sclName="ngModel" [(ngModel)]="addSchool.school_name" placeholder="Name of the School" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="sclName.touched && (sclName.invalid || sclName.errors)">
+                                                    <div *ngIf="sclName.errors['required']">
+                                                        <p class="error-text">Please enter the School name</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="sclLocation" #sclLocation="ngModel" [(ngModel)]="addSchool.locality" placeholder="Locality / Landmark" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="sclLocation.touched && (sclLocation.invalid || sclLocation.errors)">
+                                                    <div *ngIf="sclLocation.errors['required']">
+                                                        <p class="error-text">Please enter the Location</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="sclArea" #sclArea="ngModel" [(ngModel)]="addSchool.area" placeholder="Area" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="sclArea.touched && (sclArea.invalid || sclArea.errors)">
+                                                    <div *ngIf="sclArea.errors['required']">
+                                                        <p class="error-text">Please enter the area</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="sclCity" #sclCity="ngModel" [(ngModel)]="addSchool.city" placeholder="City" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="sclCity.touched && (sclCity.invalid || sclCity.errors)">
+                                                    <div *ngIf="sclCity.errors['required']">
+                                                        <p class="error-text">Please enter the city</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="sclPin" #sclPin="ngModel" pattern="^[0-9]*$" [(ngModel)]="addSchool.pincode" placeholder="Pincode" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="sclPin.touched && (sclPin.invalid || sclPin.errors)">
+                                                    <div *ngIf="sclPin.errors['required']">
+                                                        <p class="error-text">Please enter the Pincode</p>
+                                                    </div>
+                                                    <div *ngIf="sclPin.errors['pattern']">
+                                                        <p class="error-text">Please enter only numbers</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="sclState" #sclState="ngModel" [(ngModel)]="addSchool.state" placeholder="State" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="sclState.touched && (sclState.invalid || sclState.errors)">
+                                                    <div *ngIf="sclState.errors['required']">
+                                                        <p class="error-text">Please enter the state</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 bdr-rgt">
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="sclStudentName" #sclStudentName="ngModel" [(ngModel)]="addSchool.student_name" placeholder="Student Name" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="sclStudentName.touched && (sclStudentName.invalid || sclStudentName.errors)">
+                                                    <div *ngIf="sclStudentName.errors['required']">
+                                                        <p class="error-text">Please enter the Student name</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="sclClass" #sclClass="ngModel" [(ngModel)]="addSchool.class" placeholder="Class" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="sclClass.touched && (sclClass.invalid || sclClass.errors)">
+                                                    <div *ngIf="sclClass.errors['required']">
+                                                        <p class="error-text">Please enter the Class</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="sclSection" #sclSection="ngModel" [(ngModel)]="addSchool.section" placeholder="Section" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="sclSection.touched && (sclSection.invalid || sclSection.errors)">
+                                                    <div *ngIf="sclSection.errors['required']">
+                                                        <p class="error-text">Please enter the Section</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="sclRoll" #sclRoll="ngModel" [(ngModel)]="addSchool.roll_number" placeholder="Roll Number" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="sclRoll.touched && (sclRoll.invalid || sclRoll.errors)">
+                                                    <div *ngIf="sclRoll.errors['required']">
+                                                        <p class="error-text">Please enter the Roll number</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="sclBankAccountName" #sclBankAccountName="ngModel" [(ngModel)]="addSchool.bank_account_name" placeholder="Name as per the Bank" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="sclBankAccountName.touched && (sclBankAccountName.invalid || sclBankAccountName.errors)">
+                                                    <div *ngIf="sclBankAccountName.errors['required']">
+                                                        <p class="error-text">Please enter the name as per the bank records</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="sclIfsc" #sclIfsc="ngModel" [(ngModel)]="addSchool.ifsc" placeholder="IFSC Code" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="sclIfsc.touched && (sclIfsc.invalid || sclIfsc.errors)">
+                                                    <div *ngIf="sclIfsc.errors['required']">
+                                                        <p class="error-text">Please enter the IFSC code</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="sclBankName" #sclBankName="ngModel" [(ngModel)]="addSchool.bank_name" placeholder="Name of the Bank" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="sclBankName.touched && (sclBankName.invalid || sclBankName.errors)">
+                                                    <div *ngIf="sclBankName.errors['required']">
+                                                        <p class="error-text">Please enter the bank name</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" pattern="^[0-9]*$" name="sclBAN" #sclBAN="ngModel" [(ngModel)]="addSchool.bank_account_number" placeholder="Account Number" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="sclBAN.touched && (sclBAN.errors || sclBAN.invalid)">
+                                                    <div *ngIf="sclBAN.errors['required']">
+                                                        <p class="error-text">Please enter the Account Number</p>
+                                                    </div>
+                                                    <div *ngIf="sclBAN.errors['pattern']">
+                                                        <p class="error-text">Only numbers are allowed</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="sclCBAN" #sclCBAN="ngModel" [(ngModel)]="addSchool.confirm_bank_account_number" placeholder="Confirm Account Number" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="sclCBAN.touched && (addSchool.bank_account_number != addSchool.confirm_bank_account_number)">
+                                                    <p class="error-text">Account Numbers does not match</p>
+                                                </div>
+                                                <div *ngIf="sclCBAN.touched && (sclCBAN.errors || sclCBAN.invalid)">
+                                                    <p class="error-text">Please confirm the account number</p>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="sclSchoolEmail" #sclSchoolEmail="ngModel" [(ngModel)]="addSchool.school_email_id" pattern="^[A-Za-z0-9._%+-]{1,64}@(?:[A-Za-z0-9-]{1,63}\.){1,125}[A-Za-z]{2,63}$" placeholder="School Mail ID" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="sclSchoolEmail.touched && (sclSchoolEmail.errors || sclSchoolEmail.invalid)" class="">
+                                                    <div *ngIf="sclSchoolEmail.errors['required']">
+                                                        <p class="error-text">Please enter the Email</p>
+                                                    </div>
+                                                    <div *ngIf="sclSchoolEmail.errors['pattern']">
+                                                        <p class="error-text">Please enter a valid Email</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" pattern="^[0-9]{10}$" name="sclMobile" #sclMobile="ngModel" [(ngModel)]="addSchool.school_mobile" placeholder="School Phone Number" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="sclMobile.touched && (sclMobile.errors || sclMobile.invalid)">
+                                                    <div *ngIf="sclMobile.errors['required']">
+                                                        <p class="error-text">Please enter the phone number</p>
+                                                    </div>
+                                                    <div *ngIf="sclMobile.errors['pattern']">
+                                                        <p class="error-text">Please enter 10 digits</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div> <br>
+                                <button type="button" [disabled]="(addSchoolForm.form['invalid'] || UserStatus!=2)" data-target="#confirmationModal" data-toggle="modal" (click)="addSchools()" class="btn btn-primary custom-button" data-dismiss="modal">Save & Exit</button>
+                                <button type="button" [disabled]="(addSchoolForm.form['invalid'] || UserStatus!=2)" (click)="addSchoolsAndPay()" class="btn btn-success custom-button">Save & Pay</button>
+                            </form>
+                        </div>
+                        <!-- Add Beneficiary Details Ends -->
+                    </div>
+                </div>
+            </div>
+
+            <!--College Panel-->
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsefive" aria-expanded="false" aria-controls="collapseThree">
+                            <i class="more-less glyphicon glyphicon-plus"></i> Add a College
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapsefive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body well well-sm text-center">
+                        <h4 class="orange">
+                            Add a College - Beneficiary Details
+                        </h4>
+                        <!-- Add Beneficiary Details Starts -->
+
+                        <div>
+                            <form #collegeForm="ngForm" novalidate>
+                                <div class="row"><br>
+                                    <div class="col-lg-4 bdr-rgt">
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="clgNickName" #clgNickName="ngModel" [(ngModel)]="addCollege.nick_name" placeholder="Nick Name of the College" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="clgNickName.touched && (clgNickName.invalid || clgNickName.errors)">
+                                                    <div *ngIf="clgNickName.errors['required']">
+                                                        <p class="error-text">Please enter the college nick name</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="clgName" #clgName="ngModel" [(ngModel)]="addCollege.college_name" placeholder="Name of the College" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="clgName.touched && (clgName.invalid || clgName.errors)">
+                                                    <div *ngIf="clgName.errors['required']">
+                                                        <p class="error-text">Please enter the college name</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="clgLocation" #clgLocation="ngModel" [(ngModel)]="addCollege.locality" placeholder="Locality / Landmark" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="clgLocation.touched && (clgLocation.invalid || clgLocation.errors)">
+                                                    <div *ngIf="clgLocation.errors['required']">
+                                                        <p class="error-text">Please enter the Location</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="clgArea" #clgArea="ngModel" [(ngModel)]="addCollege.area" placeholder="Area" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="clgArea.touched && (clgArea.invalid || clgArea.errors)">
+                                                    <div *ngIf="clgArea.errors['required']">
+                                                        <p class="error-text">Please enter the area</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="clgCity" #clgCity="ngModel" [(ngModel)]="addCollege.city" placeholder="City" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="clgCity.touched && (clgCity.invalid || clgCity.errors)">
+                                                    <div *ngIf="clgCity.errors['required']">
+                                                        <p class="error-text">Please enter the city</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="clgPin" #clgPin="ngModel" pattern="^[0-9]*$" [(ngModel)]="addCollege.pincode" placeholder="Pincode" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="clgPin.touched && (clgPin.invalid || clgPin.errors)">
+                                                    <div *ngIf="clgPin.errors['required']">
+                                                        <p class="error-text">Please enter the Pincode</p>
+                                                    </div>
+                                                    <div *ngIf="clgPin.errors['pattern']">
+                                                        <p class="error-text">Please enter only numbers</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="clgState" #clgState="ngModel" [(ngModel)]="addCollege.state" placeholder="State" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="clgState.touched && (clgState.invalid || clgState.errors)">
+                                                    <div *ngIf="clgState.errors['required']">
+                                                        <p class="error-text">Please enter the state</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 bdr-rgt">
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="clgStudentName" #clgStudentName="ngModel" [(ngModel)]="addCollege.student_name" placeholder="Student Name" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="clgStudentName.touched && (clgStudentName.invalid || clgStudentName.errors)">
+                                                    <div *ngIf="clgStudentName.errors['required']">
+                                                        <p class="error-text">Please enter the Student name</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="clgGroup" #clgGroup="ngModel" [(ngModel)]="addCollege.student_group" placeholder="Group" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="clgGroup.touched && (clgGroup.invalid || clgGroup.errors)">
+                                                    <div *ngIf="clgGroup.errors['required']">
+                                                        <p class="error-text">Please enter the Group</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="clgSection" #clgSection="ngModel" [(ngModel)]="addCollege.section" placeholder="Section" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="clgSection.touched && (clgSection.invalid || clgSection.errors)">
+                                                    <div *ngIf="clgSection.errors['required']">
+                                                        <p class="error-text">Please enter the Section</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="clgRoll" #clgRoll="ngModel" [(ngModel)]="addCollege.roll_number" placeholder="Roll Number" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="clgRoll.touched && (clgRoll.invalid || clgRoll.errors)">
+                                                    <div *ngIf="clgRoll.errors['required']">
+                                                        <p class="error-text">Please enter the Roll number</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="clgBankAccountName" #clgBankAccountName="ngModel" [(ngModel)]="addCollege.bank_account_name" placeholder="Name as per the Bank" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="clgBankAccountName.touched && (clgBankAccountName.invalid || clgBankAccountName.errors)">
+                                                    <div *ngIf="clgBankAccountName.errors['required']">
+                                                        <p class="error-text">Please enter the name as per the bank records</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="clgIfsc" #clgIfsc="ngModel" [(ngModel)]="addCollege.ifsc" placeholder="IFSC Code" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="clgIfsc.touched && (clgIfsc.invalid || clgIfsc.errors)">
+                                                    <div *ngIf="clgIfsc.errors['required']">
+                                                        <p class="error-text">Please enter the IFSC code</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="clgBankName" #clgBankName="ngModel" [(ngModel)]="addCollege.bank_name" placeholder="Name of the Bank" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="clgBankName.touched && (clgBankName.invalid || clgBankName.errors)">
+                                                    <div *ngIf="clgBankName.errors['required']">
+                                                        <p class="error-text">Please enter the bank name</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" pattern="^[0-9]*$" name="clgBAN" #clgBAN="ngModel" [(ngModel)]="addCollege.bank_account_number" placeholder="Account Number" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="clgBAN.touched && (clgBAN.errors || clgBAN.invalid)">
+                                                    <div *ngIf="clgBAN.errors['required']">
+                                                        <p class="error-text">Please enter the Account Number</p>
+                                                    </div>
+                                                    <div *ngIf="clgBAN.errors['pattern']">
+                                                        <p class="error-text">Only numbers are allowed</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="clgCBAN" #clgCBAN="ngModel" [(ngModel)]="addCollege.confirm_bank_account_number" placeholder="Confirm Account Number" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="clgCBAN.touched && (addCollege.bank_account_number != addCollege.confirm_bank_account_number)">
+                                                    <p class="error-text">Account Numbers does not match</p>
+                                                </div>
+                                                <div *ngIf="clgCBAN.touched && (clgCBAN.errors || clgCBAN.invalid)">
+                                                    <p class="error-text">Please confirm the account number</p>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" name="clgEmail" #clgEmail="ngModel" pattern="^[A-Za-z0-9._%+-]{1,64}@(?:[A-Za-z0-9-]{1,63}\.){1,125}[A-Za-z]{2,63}$" [(ngModel)]="addCollege.college_email_id" placeholder="College Mail ID" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="clgEmail.touched && (clgEmail.errors || clgEmail.invalid)" class="">
+                                                    <div *ngIf="clgEmail.errors['required']">
+                                                        <p class="error-text">Please enter the Email</p>
+                                                    </div>
+                                                    <div *ngIf="clgEmail.errors['pattern']">
+                                                        <p class="error-text">Please enter a valid Email</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
+                                                <input class="effect-2" type="text" pattern="^[0-9]{10}$" name="clgMobile" #clgMobile="ngModel" [(ngModel)]="addCollege.college_mobile" placeholder="College Phone Number" required>
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="clgMobile.touched && (clgMobile.errors || clgMobile.invalid)">
+                                                    <div *ngIf="clgMobile.errors['required']">
+                                                        <p class="error-text">Please enter the phone number</p>
+                                                    </div>
+                                                    <div *ngIf="clgMobile.errors['pattern']">
+                                                        <p class="error-text">Please enter 10 digits</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div> <br>
+                                <button type="button" [disabled]="collegeForm.form['invalid'] || UserStatus!=2" data-target="#confirmationModal" data-toggle="modal" (click)="addColleges()" class="btn btn-primary custom-button" data-dismiss="modal">Save & Exit</button>
+                                <button type="button" [disabled]="collegeForm.form['invalid'] || UserStatus!=2" (click)="addCollegesAndPay()" class="btn btn-success custom-button">Save & Pay</button>
+                            </form>
+                        </div>
+
+                        <!-- Add Beneficiary Details Ends -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Main Content Ends -->
+</div>
+
+
+
+<!--Confirmation Modal-->
+<div id="confirmationModal" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Result</h4>
+            </div>
+            <div class="modal-body">
+                <p *ngIf="operationResult.message!=''" class="text-center">{{operationResult.message}}</p>
+                <p *ngIf="operationResult.message==''" class="text-center">Failed to add. Please contact us</p>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center">
+                    <button class="btn btn-success" data-dismiss="modal" (click)="addBankAccountForm.form.reset();addHouseRentPropertyForm.form.reset();addMonthlyMaintenanceForm.form.reset();addSchoolForm.form.reset();collegeForm.form.reset();redirectMakepayment()">Close</button>
+                </div>
+            </div>
+            <div class="clearfix">&nbsp;</div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dalog -->
+</div>

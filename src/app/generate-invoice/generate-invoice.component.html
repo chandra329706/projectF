@@ -1,0 +1,385 @@
+<div *ngIf="UserStatus==1" class="row" style="text-align:center">
+    You have not verified your pancard document. Please upload it here <a [routerLink]="['/profile']" class="btn btn-danger">Upload KYC </a>
+</div>
+<div>
+
+    <!-- Your Content goes Here -->
+
+
+    <div class="page-title hidden-print">
+        <div>
+            <h1><i class="fa fa-file-text-o"></i> Invoice</h1>
+            <p>A Printable Invoice Format</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div>
+                <form class="form-horizontal" ngForm="invoiceForm" novalidate>
+                    <section class="invoice">
+                        <div class="row">
+                            <div class="col-xs-12">
+
+                                <h2 class="page-header">
+                                    <div class="col-sm-4 no-padd">
+                                        <div class="form-group">
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i style="font-size:20px;margin-right:0px;" class="fa fa-globe pull-left"></i> </div>
+                                                <input class="form-control" name="company" #company="ngModel" [(ngModel)]="mainData.companyName" placeholder="Company Name">
+                                                <div *ngIf="company.touched && (company.errors || company.invalid)" class="">
+                                                    <div *ngIf="company.errors['required']">
+                                                        <p class="error-text">Please enter the company name</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-sm-offset-4 no-padd">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Date</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="date" #date="ngModel" [(ngModel)]="mainData.date" placeholder="Date">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="row invoice-info">
+                            <div class="col-xs-4">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">From</label>
+                                    <input type="text" name="fromName" #fromName="ngModel" [(ngModel)]="from.name" class="form-control" placeholder="Name" required>
+                                    <div *ngIf="fromName.touched && (fromName.errors || fromName.invalid)" class="">
+                                        <div *ngIf="fromName.errors['required']">
+                                            <p class="error-text">Please enter the name</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Address</label>
+                                    <textarea class="form-control" name="fromAddress" #fromAddress="ngModel" [(ngModel)]="from.address" rows="3" placeholder="Address" required></textarea>
+                                    <div *ngIf="fromAddress.touched && (fromAddress.errors || fromAddress.invalid)" class="">
+                                        <div *ngIf="fromAddress.errors['required']">
+                                            <p class="error-text">Please enter the address</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Phone</label>
+                                    <input type="text" class="form-control" name="fromPhone" #fromPhone="ngModel" [(ngModel)]="from.phone" pattern="^[0-9]{10}$" placeholder="Phone number" required>
+                                    <div *ngIf="fromPhone.touched && (fromPhone.errors || fromPhone.invalid)">
+                                        <div *ngIf="fromPhone.errors['required']">
+                                            <p class="error-text">Please enter the phone number</p>
+                                        </div>
+                                        <div *ngIf="fromPhone.errors['pattern']">
+                                            <p class="error-text">Please enter 10 digits</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email</label>
+                                    <input type="text" class="form-control" name="fromEmail" #fromEmail="ngModel" [(ngModel)]="from.email" pattern="^[A-Za-z0-9._%+-]{1,64}@(?:[A-Za-z0-9-]{1,63}\.){1,125}[A-Za-z]{2,63}$" placeholder="Email" required>
+                                    <div *ngIf="fromEmail.touched && (fromEmail.errors || fromEmail.invalid)" class="">
+                                        <div *ngIf="fromEmail.errors['required']">
+                                            <p class="error-text">Please enter the email id</p>
+                                        </div>
+                                        <div *ngIf="fromEmail.errors['pattern']">
+                                            <p class="error-text">Please enter a valid email id</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-xs-4">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">To</label>
+                                    <input type="text" name="toName" #toName="ngModel" [(ngModel)]="to.name" class="form-control" placeholder="Name" required>
+                                    <div *ngIf="toName.touched && (toName.errors || toName.invalid)" class="">
+                                        <div *ngIf="toName.errors['required']">
+                                            <p class="error-text">Please enter the name</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Address</label>
+                                    <textarea class="form-control" name="toAddress" #toAddress="ngModel" [(ngModel)]="to.address" rows="3" placeholder="Address" required></textarea>
+                                    <div *ngIf="toAddress.touched && (toAddress.errors || toAddress.invalid)" class="">
+                                        <div *ngIf="toAddress.errors['required']">
+                                            <p class="error-text">Please enter the address</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Phone</label>
+                                    <input type="text" class="form-control" name="toPhone" #toPhone="ngModel" [(ngModel)]="to.phone" placeholder="Phone" pattern="^[0-9]{10}$" required>
+                                    <div *ngIf="toPhone.touched && (toPhone.errors || toPhone.invalid)">
+                                        <div *ngIf="toPhone.errors['required']">
+                                            <p class="error-text">Please enter the phone number</p>
+                                        </div>
+                                        <div *ngIf="toPhone.errors['pattern']">
+                                            <p class="error-text">Please enter 10 digits</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email</label>
+                                    <input type="text" class="form-control" name="toEmail" #toEmail="ngModel" [(ngModel)]="to.email" placeholder="Email" pattern="^[A-Za-z0-9._%+-]{1,64}@(?:[A-Za-z0-9-]{1,63}\.){1,125}[A-Za-z]{2,63}$" required>
+                                    <div *ngIf="toEmail.touched && (toEmail.errors || toEmail.invalid)" class="">
+                                        <div *ngIf="toEmail.errors['required']">
+                                            <p class="error-text">Please enter the email id</p>
+                                        </div>
+                                        <div *ngIf="toEmail.errors['pattern']">
+                                            <p class="error-text">Please enter a valid email id</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Invoice</label>
+                                    <input type="text" class="form-control" name="invoiceNumber" #invoiceNumber="ngModel" [(ngModel)]="invoice.number" placeholder="Invoice Number" required>
+                                    <div *ngIf="invoiceNumber.touched && (invoiceNumber.errors || invoiceNumber.invalid)" class="">
+                                        <div *ngIf="invoiceNumber.errors['required']">
+                                            <p class="error-text">Please enter the invoice number</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Order Id</label>
+                                    <input type="text" class="form-control" name="orderid" #orderid="ngModel" [(ngModel)]="invoice.id" placeholder="Order Id" required>
+                                    <div *ngIf="orderid.touched && (orderid.errors || orderid.invalid)" class="">
+                                        <div *ngIf="orderid.errors['required']">
+                                            <p class="error-text">Please enter the Order Id</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Payment Due</label>
+                                    <input type="text" class="form-control" name="duedate" #duedate="ngModel" [(ngModel)]="invoice.duedate" placeholder="Payment due date" required>
+                                    <div *ngIf="duedate.touched && (duedate.errors || duedate.invalid)" class="">
+                                        <div *ngIf="duedate.errors['required']">
+                                            <p class="error-text">Please enter the due date</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 table-responsive">
+                                <table class="table table-striped table-hover text-center" id="tableAddRow">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Product / Service details</th>
+                                            <th>Qty</th>
+                                            <th>Unit Price</th>
+                                            <th>Description</th>
+                                            <th>Tax type</th>
+                                            <th>Tax %</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of productsList; let i = index">
+                                            <td> {{i+1}} </td>
+                                            <td> <input type="text" name="pName{{i}}" [(ngModel)]="item.pn" class="form-control" placeholder="abcd"> </td>
+                                            <td> <input type="text" name="pQty{{i}}" [(ngModel)]="item.qty" class="form-control" placeholder="3"></td>
+                                            <td> <input type="text" name="pPrice{{i}}" [(ngModel)]="item.price" class="form-control" placeholder="5000"></td>
+                                            <td> <input type="text" name="pDesc{{i}}" [(ngModel)]="item.desc" class="form-control" placeholder="---"></td>
+                                            <td> <input type="text" name="pTaxType{{i}}" [(ngModel)]="item.taxType" class="form-control" placeholder="Tax1"></td>
+                                            <td> <input type="text" name="pTaxAmount{{i}}" [(ngModel)]="item.taxAmount" class="form-control" placeholder="14%"></td>
+                                            <td> <input type="text" name="pTotal{{i}}" [(ngModel)]="item.total" class="form-control" placeholder="5245"></td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="4"></td>
+                                            <td align="right"><a type="button" class="btn btn-primary addBtn" (click)="addNewRow()" style="margin-top:10px">Add New item +</a></td>
+                                            <td class="text-right" colspan="2">
+                                                <h4>GRAND TOTAL</h4>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="grandTotal" [(ngModel)]="mainData.grandTotal" class="form-control" placeholder="10000">
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea style="resize:vertical" class="form-control" name="tnc" #tnc="ngModel" [(ngModel)]="mainData.tnc" rows="3" placeholder="Terms & Conditions" required></textarea>
+                                <div *ngIf="tnc.touched && (tnc.errors || tnc.invalid)" class="">
+                                    <div *ngIf="tnc.errors['required']">
+                                        <p class="error-text">Please enter the Terms & Conditions</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="text-center">
+                                <label><h4><span class="orange"><b>Who will pay the processing fee</b></span></h4></label>
+                                <label class="radio-inline">
+                                  <input type="radio" name="payer" #payer="ngModel" [(ngModel)]="mainData.payer" value="sender" required>Request Sender
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" name="payer" #payer="ngModel" [(ngModel)]="mainData.payer" value="receiver" required>Request Reciever
+                                </label>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row hidden-print mt-20 text-center">
+                            <!--<button type="submit" class="btn btn-success" (click)="downloadData()">Download</button>-->
+                            <button type="submit" class="btn btn-success" data-target="#invoicePreview" data-toggle="modal">Preview & Download Invoice</button>
+                            <button type="submit" class="btn btn-primary">Email & Request Payment</button>
+                        </div>
+                    </section>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<br/>
+
+<!--Invoice Preview Modal-->
+<div id="invoicePreview" class="modal fade in">
+    <div class="modal-dialog fullwidth-modal">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Invoice Preview</h4>
+            </div>
+            <div class="modal-body">
+
+
+
+                <!--For PDF-->
+                <div #pdfMaker style="background: white;color: black; padding: 40px 70px;">
+                    <h1 class="text-center">Flexypay</h1>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-2 text-center"><label>Company Name</label></div>
+                        <div class="col-md-2 text-left">{{mainData.companyName}}</div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-2 text-right"><label>Date</label></div>
+                        <div class="col-md-2 text-center">{{mainData.date}}</div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="text-center">From</h5>
+                            <div class="col-md-4"> <label>Name</label> :</div>
+                            <div class="col-md-8"> {{from.name}}</div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-4"> <label>Address</label> :</div>
+                            <div class="col-md-8"> {{from.address}}</div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-4"> <label>Phone</label> :</div>
+                            <div class="col-md-8"> {{from.phone}}</div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-4"> <label>Email</label> :</div>
+                            <div class="col-md-8"> {{from.email}}</div>
+                        </div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <h5 class="text-center">To</h5>
+                            <div class="col-md-4"> <label>Name</label> :</div>
+                            <div class="col-md-8"> {{to.name}}</div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-4"> <label>Address</label> :</div>
+                            <div class="col-md-8"> {{to.address}}</div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-4"> <label>Phone</label> :</div>
+                            <div class="col-md-8"> {{to.phone}}</div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-4"> <label>Email</label> :</div>
+                            <div class="col-md-8"> {{to.email}}</div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br/>
+                    <div class="clearfix"></div>
+                    <h4 class="text-center">Invoice</h4>
+                    <table class="table text-center">
+                        <tr>
+                            <th><label>Invoice Number</label></th>
+                            <th>{{invoice.number}}</th>
+                            <th><label>Order Id</label></th>
+                            <th>{{invoice.id}}</th>
+                            <th><label>Payment Due</label></th>
+                            <th>{{invoice.duedate}}</th>
+                        </tr>
+                    </table>
+                    <table class="table table-striped table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Product / Service details</th>
+                                <th>Qty</th>
+                                <th>Unit Price</th>
+                                <th>Description</th>
+                                <th>Tax type</th>
+                                <th>Tax %</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of productsList; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{item.pn}}</td>
+                                <td>{{item.qty}}</td>
+                                <td>{{item.price}}</td>
+                                <td>{{item.desc}}</td>
+                                <td>{{item.taxType}}</td>
+                                <td>{{item.taxAmount}}</td>
+                                <td>{{item.total}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5"></td>
+                                <td class="text-right" colspan="2">
+                                    <h4>GRAND TOTAL</h4>
+                                </td>
+                                <td>
+                                    <h4>{{mainData.grandTotal}}</h4>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>{{mainData.tnc}}</p>
+                            <br/>
+                            <h4>Note:</h4>
+                            <p>The processing fee should be payed by the <span style="font-size: 18px; font-weight: 600">{{mainData.payer}}</span></p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer" style="text-align:center">
+                <button type="submit" class="btn btn-success" (click)="downloadData()" data-dismiss="modal">Download</button>
+            </div>
+
+            <div class="clearfix">&nbsp;</div>
+        </div>
+    </div>
+</div>

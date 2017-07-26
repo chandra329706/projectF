@@ -1,0 +1,804 @@
+<div class="wrapper">
+    <!-- Navbar-->
+    <header class="main-header hidden-print"><a class="logo" href="Dashboard_Layout.html">Flexypay</a>
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a class="sidebar-toggle" href="#" data-toggle="offcanvas"></a>
+
+
+            <div class="navbar-custom-menu">
+                <ul class="top-nav">
+                    <!-- User Menu-->
+                    <li class="hidden-xs"><a href="View_Beneficiary.html"> View Beneficiary</a></li>
+                    <li class="hidden-xs"><a href="Add_Beneficiary.html">Add Beneficiary</a></li>
+                    <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-lg"></i>
+              &nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu settings-menu">
+                            <li><a href="Profile-user.html"><i class="fa fa-user fa-lg"></i>My Profile</a></li>
+                            <li><a href="#"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Navbar End -->
+    <!-- Side-Nav-->
+    <aside class="main-sidebar hidden-print">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image"><img class="img-circle" src="images/user.png" alt="User Image"></div>
+                <div class="pull-left info">
+                    <p>Manoj Rapeti</p>
+                    <a href="CUG_Wallet.html" class="cug-wallet">
+                        <p>CUG Balance : 200 &#x20B9;</p>
+                    </a>
+                </div>
+            </div>
+            <!-- Sidebar Menu-->
+            <ul class="sidebar-menu">
+                <li class="active"><a href="Dashboard_Layout.html"><i class="fa fa-dashboard"></i><span>Make Payments</span></a></li>
+                <li class="treeview"><a href="Request_Payment.html"><i class="fa fa-laptop"></i><span>Request Payments</span></a></li>
+                <li><a href="Transaction_History.html"><i class="fa fa-pie-chart"></i><span>Transaction History</span></a></li>
+                <li class="treeview"><a href="Refer_Earn.html"><i class="fa fa-edit"></i><span>Refer a Friend</span></a>
+                </li>
+                <li class="treeview visible-xs"><a href="View_Beneficiary.html"><i class="fa fa-users" aria-hidden="true"></i><span>View Beneficiary</span></a>
+                </li>
+                <li class="treeview visible-xs"><a href="Add_Beneficiary.html"><i class="fa fa-user-plus" aria-hidden="true"></i><span>Add Beneficiary</span></a>
+                </li>
+                <li class="treeview"><a href="Query.html"><i class="fa fa-question-circle" aria-hidden="true"></i><span>Queries</span></a>
+                </li>
+                <li class="treeview"><a href="page-error.html"><i class="fa fa-file-text"></i><span>Generate Invoice</span></a>
+                </li>
+                <li class="treeview"><a href="Rent_Reciept.html"><i class="fa fa-share"></i><span>Rent Reciepts</span></a>
+                </li>
+            </ul>
+        </section>
+    </aside>
+    <!-- Sidebar End -->
+
+    <div class="content-wrapper">
+
+        <!-- Second Navbar Start -->
+        <div class="page-title">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="bs-component">
+                        <ul class="nav nav-pills" style="padding:10px 0">
+                            <li><a href="PayRent.html">House Rent </a></li>
+                            <li><a href="SchoolFee.html">School Fee </a></li>
+                            <li><a href="CollegeFee.html">College Fee </a></li>
+                            <li><a href="PayMaintenance.html">Maintenance </a></li>
+                            <li><a href="SendtoBank.html">Send to Bank </a></li>
+                            <li><a href="Request_Payment.html" class="btn custom-btn">Request Payments</a></li>
+                            <li><a href="Loan_Request.html" class="btn custom-btn1"> Request Loan</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Second Navbar Start -->
+
+        <div class="row">
+            <!-- Main Content Starts -->
+
+            <div class="col-lg-10 col-lg-offset-1 col-xs-12">
+                <h3 class="heading-inn"><i class="fa fa-user-plus" aria-hidden="true"></i>Add Beneficiary</h3>
+
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <i class="more-less glyphicon glyphicon-plus"></i> Add Bank Account
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body well well-sm text-center">
+                                <h4 class="orange">
+                                    Add Bank Account - Beneficiary Details
+                                </h4><br>
+                                <!-- Add Beneficiary Details Starts -->
+                                <div>
+                                    <div class="row">
+                                        <div class="col-lg-6 bdr-rgt">
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Name as per the Bank">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Account Number">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="password" placeholder="Confirm Account Number">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Name of the Bank">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="IFSC Code">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Nick Name">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Mail ID">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Phone Number">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <section>
+                                        <div class="inline-group text-left" style="padding:20px">
+                                            <label class="checkbox"><input type="checkbox" name="checkbox-inline" checked=""><small>I Shall not raise any kind of liability or its associates, if the above details are found to be untrue or incorrect. Also, I declare that the above bank details do not belong to me.</small></label>
+                                        </div>
+                                    </section>
+                                    <br>
+                                    <button type="button" class="btn btn-primary custom-button" data-dismiss="modal">Save & Exit</button>
+                                    <button type="button" class="btn btn-success custom-button" href="#">Save & Pay</button>
+                                </div>
+
+                                <!-- Add Beneficiary Details Ends -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <i class="more-less glyphicon glyphicon-plus"></i> Add a Property to pay house rent
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body well well-sm text-center">
+                                <h4 class="orange">
+                                    Add a Property to pay House Rent - Beneficiary Details
+                                </h4>
+                                <!-- Add Beneficiary Details Starts -->
+                                <div>
+                                    <div class="row"> <br>
+                                        <div class="col-lg-6 bdr-rgt">
+                                            <div class="col-md-12">
+
+                                                <select class="cs-select cs-skin-elastic">
+                                                    <option value="" disabled selected>
+                                                   Type of Property</option>                                        
+                                                    <option>Residential</option>
+                                                    <option>Commercial</option>                             
+                                                </select>
+
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Property Nick Name">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Door / House / Flat #">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Locality / Landmark">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Area">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="City">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Pincode">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="State">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <form class="form-inline">
+                                                        <div class="form-group pull-left">
+                                                            <label for="Date" style="padding:10px 0">Remainder date : </label>
+                                                            <select style="width:auto">
+                                                  <option value="" disabled selected>Select</option>
+                                                  <option>1</option>
+                                                  <option>2</option> 
+                                                  <option>3</option>
+                                                  <option>4</option>   
+                                                  <option>5</option>
+                                                  <option>6</option> 
+                                                  <option>7</option>
+                                                  <option>8</option>
+                                                  <option>9</option>
+                                                  <option>10</option>
+                                                  <option>11</option>
+                                                  <option>12</option> 
+                                                  <option>13</option>
+                                                  <option>14</option>   
+                                                  <option>15</option>
+                                                  <option>16</option> 
+                                                  <option>17</option>
+                                                  <option>18</option>
+                                                  <option>19</option>
+                                                  <option>20</option>
+                                                  <option>21</option>
+                                                  <option>22</option> 
+                                                  <option>23</option>
+                                                  <option>24</option>   
+                                                  <option>25</option>
+                                                  <option>26</option> 
+                                                  <option>27</option>
+                                                  <option>28</option>
+                                                  <option>29</option>
+                                                  <option>30</option> 
+                                                  <option>31</option>
+                                                </select>
+                                                        </div>
+                                                    </form>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Owner Name">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Name as per the Bank">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="IFSC Code">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Name of the Bank">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Account Number">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="password" placeholder="Confirm Account Number">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Owner's Mail ID">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Owner's Phone Number">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <section>
+                                        <div class="inline-group text-left" style="padding:20px">
+                                            <label class="checkbox"><input type="checkbox" name="checkbox-inline" checked=""><small>I Shall not raise any kind of liability or its associates, if the above details are found to be untrue or incorrect. Also, I declare that the above bank details do not belong to me.</small></label>
+                                        </div>
+                                    </section>
+                                    <br>
+                                    <button type="button" class="btn btn-primary custom-button" data-dismiss="modal">Save & Exit</button>
+                                    <button type="button" class="btn btn-success custom-button">Save & Pay</button>
+                                </div>
+
+                                <!-- Add Beneficiary Details Ends -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <i class="more-less glyphicon glyphicon-plus"></i> Add your property for paying monthly Maintenance
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body well well-sm text-center">
+                                <h4 class="orange">
+                                    Add your property for paying monthly Maintenance - Beneficiary Details
+                                </h4>
+                                <!-- Add Beneficiary Details Starts -->
+                                <div>
+                                    <div class="row"> <br>
+                                        <div class="col-lg-6 bdr-rgt">
+
+                                            <div class="col-md-12">
+
+                                                <select class="cs-select cs-skin-elastic">
+                                                    <option value="" disabled selected>
+                                                   Type of Property</option>            
+                                                    <option>Residential</option>
+                                                    <option>Commercial</option>                             
+                                                </select>
+
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Property Nick Name">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Door / House / Flat #">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Locality / Landmark">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Area">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="City">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Pincode">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="State">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <form class="form-inline">
+                                                        <div class="form-group pull-left">
+                                                            <label for="Date" style="padding:10px 0">Remainder date : </label>
+                                                            <select style="width:auto">
+                                                  <option value="" disabled selected>Select</option>
+                                                  <option>1</option>
+                                                  <option>2</option> 
+                                                  <option>3</option>
+                                                  <option>4</option>   
+                                                  <option>5</option>
+                                                  <option>6</option> 
+                                                  <option>7</option>
+                                                  <option>8</option>
+                                                  <option>9</option>
+                                                  <option>10</option>
+                                                  <option>11</option>
+                                                  <option>12</option> 
+                                                  <option>13</option>
+                                                  <option>14</option>   
+                                                  <option>15</option>
+                                                  <option>16</option> 
+                                                  <option>17</option>
+                                                  <option>18</option>
+                                                  <option>19</option>
+                                                  <option>20</option>
+                                                  <option>21</option>
+                                                  <option>22</option> 
+                                                  <option>23</option>
+                                                  <option>24</option>   
+                                                  <option>25</option>
+                                                  <option>26</option> 
+                                                  <option>27</option>
+                                                  <option>28</option>
+                                                  <option>29</option>
+                                                  <option>30</option> 
+                                                  <option>31</option>
+                                                </select>
+                                                        </div>
+                                                    </form>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Owner Name">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Name as per the Bank">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="IFSC Code">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Name of the Bank">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Account Number">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="password" placeholder="Confirm Account Number">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Owner's Mail ID">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Owner's Phone Number">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+
+                                        </div>
+                                    </div> <br>
+                                    <button type="button" class="btn btn-primary custom-button" data-dismiss="modal">Save & Exit</button>
+                                    <button type="button" class="btn btn-success custom-button">Save & Pay</button>
+                                </div>
+
+                                <!-- Add Beneficiary Details Ends -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingfour">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsefour" aria-expanded="false" aria-controls="collapseThree">
+                                    <i class="more-less glyphicon glyphicon-plus"></i> Add a School
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapsefour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfour">
+                            <div class="panel-body well well-sm text-center">
+                                <h4 class="orange">
+                                    Add a School - Beneficiary Details
+                                </h4>
+                                <!-- Add Beneficiary Details Starts -->
+                                <div>
+                                    <div class="row"><br>
+                                        <div class="col-lg-4 bdr-rgt">
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Nick Name of the School">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Name of the School">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Location / City">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Pincode">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 bdr-rgt">
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Student Name">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Class">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Section">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Roll Number">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Name as per the Bank">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="IFSC Code">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Account Number">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="password" placeholder="Confirm Account Number">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="School Mail ID">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="School Phone Number">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </div> <br>
+                                    <button type="button" class="btn btn-primary custom-button" data-dismiss="modal">Save & Exit</button>
+                                    <button type="button" class="btn btn-success custom-button">Save & Pay</button>
+                                </div>
+                                <!-- Add Beneficiary Details Ends -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsefive" aria-expanded="false" aria-controls="collapseThree">
+                                    <i class="more-less glyphicon glyphicon-plus"></i> Add a College
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapsefive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body well well-sm text-center">
+                                <h4 class="orange">
+                                    Add a College - Beneficiary Details
+                                </h4>
+                                <!-- Add Beneficiary Details Starts -->
+
+                                <div>
+                                    <div class="row"><br>
+                                        <div class="col-lg-4 bdr-rgt">
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Nick Name of the College">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Name of the College">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Location / City">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Pincode">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 bdr-rgt">
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Student Name">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Group">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Section">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Roll Number">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Name as per the Bank">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="IFSC Code">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="Account Number">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="password" placeholder="Confirm Account Number">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="College Mail ID">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <section>
+                                                    <input class="effect-2" type="text" placeholder="College Phone Number">
+                                                    <span class="focus-border"></span>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </div> <br>
+                                    <button type="button" class="btn btn-primary custom-button" data-dismiss="modal">Save & Exit</button>
+                                    <button type="button" class="btn btn-success custom-button">Save & Pay</button>
+                                </div>
+
+                                <!-- Add Beneficiary Details Ends -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Ends -->
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="treeview text-right" style="border-top:1px solid #ccc;bottom:0;width:100%;padding:10px 30px;"><span style="color:#000;text-align:center; font-size:12px;">Copyrights @ Flexypay</span></div>
+
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#nav-icon1,#nav-icon2,#nav-icon3,#nav-icon4').click(function() {
+            $(this).toggleClass('open');
+        });
+    });
+
+
+
+    function toggleIcon(e) {
+        $(e.target)
+            .prev('.panel-heading')
+            .find(".more-less")
+            .toggleClass('glyphicon-plus glyphicon-minus');
+    }
+    $('.panel-group').on('hidden.bs.collapse', toggleIcon);
+    $('.panel-group').on('shown.bs.collapse', toggleIcon);
+</script>
+
+<script>
+    (function() {
+        [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function(el) {
+            new SelectFx(el);
+        });
+    })();
+</script>

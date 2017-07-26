@@ -1,0 +1,404 @@
+<div *ngIf="UserStatus==1" class="row" style="text-align:center">
+    You have not verified your pancard document. Please upload it here <a [routerLink]="['/profile']" class="btn btn-danger">Upload KYC </a>
+</div>
+<div>
+    <!-- Your Content goes Here -->
+
+    <div class="form-group">
+        <div>
+            <label class="pull-left"><h3 style="line-height: 0.1;padding-right: 20px;"><span class="orange"><b>Transaction History</b></span></h3></label><br><br>
+        </div>
+    </div>
+    <div id="custom-search-input">
+        <div class="input-group col-md-12">
+            <!--<input type="text" class="form-control input-md" placeholder="Search..." />-->
+            <span class="input-group-btn">
+                <button class="btn btn-info btn-md" type="button">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="row" style="padding:2% 0;background: #fff">
+
+        <ul class="nav nav-tabs" style="padding:0 10px">
+            <li class="active"><a data-toggle="tab" href="#AllTransactions">All Transactions</a></li>
+            <li><a data-toggle="tab" href="#RentPayment" (click)="SearchTransactionType('House Rent')">Rent Payment</a></li>
+            <li><a data-toggle="tab" href="#RentDeposit"(click)="SearchTransactionType('k')">Rent Deposit</a></li>
+            <li><a data-toggle="tab" href="#Maintenance" (click)="SearchTransactionType('Maintainence')">Maintenance</a></li>
+            <li><a data-toggle="tab" href="#SchoolFees" (click)="SearchTransactionType('School')">School Fees</a></li>
+            <li><a data-toggle="tab" href="#CollegeFees" (click)="SearchTransactionType('College')">College Fees</a></li>
+            <li><a data-toggle="tab" href="#BankTransfers" (click)="SearchTransactionType('Bank')">Bank Transfers</a></li>
+            <li><a data-toggle="tab" href="#PaymentsRecieved">Payments Recieved</a></li>
+            <!--<li><a data-toggle="tab" href="#LoanRequests" (click)="SearchTransactionType()">Loan Requests</a></li>-->
+        </ul>
+
+        <div class="tab-content" style="padding:20px">
+            <div id="AllTransactions" class="tab-pane fade in active">
+                <!-- All Transactions History starts -->
+                <div class="table-responsive">
+                    <table class="table table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Transaction Type</th>
+                                <th>Transaction Ref#</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                                <th>Reciept</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let transaction of TotalTransactionHistoryList.data">
+                                <td>{{transaction.payment_transaction_time}}</td>
+                                <td>{{transaction.main_tran_type}}</td>
+                                <td>{{transaction.transaction_code}}</td>
+                                <td>{{transaction.payment_status}}</td>
+                                <td>{{transaction.actual_amount}}</td>
+                                
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#TransHist" class="btn btn-primary" (click)="getTransactionDetails(transaction.id)">View</a>
+                                    <button type="button" class="btn btn-success" (click)="download_transaction(transaction.id)">Download</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- All Transactions History ends -->
+
+            </div>
+            <div id="RentPayment" class="tab-pane fade">
+                <h3>Rent Payment</h3>
+                <!--<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
+                 <div class="table-responsive">
+                    <table class="table table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Transaction Type</th>
+                                <th>Transaction Ref#</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                                <th>Reciept</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let transaction of TotalTransactionHistoryList.data | tabFilter : TabFilterText">
+                                <td>{{transaction.payment_transaction_time}}</td>
+                                <td>{{transaction.main_tran_type}}</td>
+                                <td>{{transaction.transaction_code}}</td>
+                                <td>{{transaction.payment_status}}</td>
+                                <td>{{transaction.actual_amount}}</td>
+                                
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#TransHist" class="btn btn-primary" (click)="getTransactionDetails(transaction.id)">View</a>
+                                    <button type="button" class="btn btn-success" (click)="download_transaction(transaction.id)">Download</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="RentDeposit" class="tab-pane fade">
+                <h3>Rent Deposit</h3>
+                <!--<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>-->
+                <div class="table-responsive">
+                    <table class="table table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Transaction Type</th>
+                                <th>Transaction Ref#</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                                <th>Reciept</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let transaction of TotalTransactionHistoryList.data | tabFilter : TabFilterText">
+                                <td>{{transaction.payment_transaction_time}}</td>
+                                <td>{{transaction.main_tran_type}}</td>
+                                <td>{{transaction.transaction_code}}</td>
+                                <td>{{transaction.payment_status}}</td>
+                                <td>{{transaction.actual_amount}}</td>
+                                
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#TransHist" class="btn btn-primary" (click)="getTransactionDetails(transaction.id)">View</a>
+                                    <button type="button" class="btn btn-success" (click)="download_transaction(transaction.id)">Download</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="Maintenance" class="tab-pane fade">
+                <h3>Maintenance</h3>
+                <!--<p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>-->
+                <div class="table-responsive">
+                    <table class="table table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Transaction Type</th>
+                                <th>Transaction Ref#</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                                <th>Reciept</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let transaction of TotalTransactionHistoryList.data | tabFilter : TabFilterText">
+                                <td>{{transaction.payment_transaction_time}}</td>
+                                <td>{{transaction.main_tran_type}}</td>
+                                <td>{{transaction.transaction_code}}</td>
+                                <td>{{transaction.payment_status}}</td>
+                                <td>{{transaction.actual_amount}}</td>
+                                
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#TransHist" class="btn btn-primary" (click)="getTransactionDetails(transaction.id)">View</a>
+                                    <button type="button" class="btn btn-success" (click)="download_transaction(transaction.id)">Download</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="SchoolFees" class="tab-pane fade">
+                <h3>School Fees</h3>
+                <!--<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
+                <div class="table-responsive">
+                    <table class="table table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Transaction Type</th>
+                                <th>Transaction Ref#</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                                <th>Reciept</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let transaction of TotalTransactionHistoryList.data | tabFilter : TabFilterText">
+                                <td>{{transaction.payment_transaction_time}}</td>
+                                <td>{{transaction.main_tran_type}}</td>
+                                <td>{{transaction.transaction_code}}</td>
+                                <td>{{transaction.payment_status}}</td>
+                                <td>{{transaction.actual_amount}}</td>
+                                
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#TransHist" class="btn btn-primary" (click)="getTransactionDetails(transaction.id)">View</a>
+                                    <button type="button" class="btn btn-success" (click)="download_transaction(transaction.id)">Download</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="CollegeFees" class="tab-pane fade">
+                <h3>College Fees</h3>
+                <!--<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>-->
+                <div class="table-responsive">
+                    <table class="table table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Transaction Type</th>
+                                <th>Transaction Ref#</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                                <th>Reciept</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let transaction of TotalTransactionHistoryList.data | tabFilter : TabFilterText">
+                                <td>{{transaction.payment_transaction_time}}</td>
+                                <td>{{transaction.main_tran_type}}</td>
+                                <td>{{transaction.transaction_code}}</td>
+                                <td>{{transaction.payment_status}}</td>
+                                <td>{{transaction.actual_amount}}</td>
+                                
+                                <td>
+                                   <a href="#" data-toggle="modal" data-target="#TransHist" class="btn btn-primary" (click)="getTransactionDetails(transaction.id)">View</a>
+                                    <button type="button" class="btn btn-success" (click)="download_transaction(transaction.id)">Download</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="BankTransfers" class="tab-pane fade">
+                <h3>Bank Transfers</h3>
+                <!--<p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>-->
+                <div class="table-responsive">
+                    <table class="table table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Transaction Type</th>
+                                <th>Transaction Ref#</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                                <th>Reciept</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let transaction of TotalTransactionHistoryList.data | tabFilter : TabFilterText">
+                                <td>{{transaction.payment_transaction_time}}</td>
+                                <td>{{transaction.main_tran_type}}</td>
+                                <td>{{transaction.transaction_code}}</td>
+                                <td>{{transaction.payment_status}}</td>
+                                <td>{{transaction.actual_amount}}</td>
+                                
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#TransHist" class="btn btn-primary" (click)="getTransactionDetails(transaction.id)">View</a>
+                                    <button type="button" class="btn btn-success" (click)="download_transaction(transaction.id)">Download</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="PaymentsRecieved" class="tab-pane fade">
+                <h3>Payments Recieved</h3>
+                <!--<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>-->
+                <div class="table-responsive">
+                    <table class="table table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Transaction Type</th>
+                                <th>Transaction Ref#</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                                <th>Reciept</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let rpData of RecievedPaymentsData.data">
+                                <td>{{rpData.transaction_date}}</td>
+                                <td>{{rpData.mode_of_payment}}</td>
+                                <td>{{rpData.payment_transaction_number}}</td>
+                                <td>Completed</td>
+                                <td>{{rpData.amount}}</td>
+                                
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#TransHist" class="btn btn-primary" (click)="getTransactionDetails(transaction.id)">View</a>
+                                    <button type="button" class="btn btn-success" (click)="download_transaction(transaction.id)">Download</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="LoanRequests" class="tab-pane fade">
+                <h3>Loan Requests</h3>
+                <!--<p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>-->
+                <div class="table-responsive">
+                    <table class="table table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Transaction Type</th>
+                                <th>Transaction Ref#</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                                <th>Reciept</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let transaction of TotalTransactionHistoryList.data | tabFilter : TabFilterText">
+                                <td>{{transaction.payment_transaction_time}}</td>
+                                <td>{{transaction.main_tran_type}}</td>
+                                <td>{{transaction.transaction_code}}</td>
+                                <td>{{transaction.payment_status}}</td>
+                                <td>{{transaction.actual_amount}}</td>
+                                
+                                <td>
+                                    <button type="button" class="btn btn-primary">View</button>
+                                    <button type="button" class="btn btn-success">Download</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- TransID Modal -->
+<div id="TransHist" class="modal fade" role="dialog">
+  <div class="modal-dialog" style="width:55%">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><i class="fa fa-globe"></i> Flexypay <small> - Transaction Details </small></h4>
+      </div>
+      <div class="modal-body">
+        <div class="row" *ngIf="TransactionDetails.status == 1">
+          <div class="col-md-12">
+           
+              <div>              
+                <div class="row">
+                  <div class="col-xs-6">                  
+                      Transaction ID : <b>{{TransactionDetails.transaction_code}}</b> <br>
+                      Transaction Status : <b>{{((TransactionDetails.transaction_status==0)?"Initiated":((TransactionDetails.transaction_status==1)?"Success":((TransactionDetails.transaction_status==2)?"Failed":((TransactionDetails.transaction_status==3)?"Pending":((TransactionDetails.transaction_status==4)?"Re Funded":"Not Available")))))}}</b> <br>    
+                      Transaction Date : <b>{{TransactionDetails.transaction_date}}</b><br>
+                    Transaction Time : <b>{{TransactionDetails.transaction_time}}</b>               
+                  </div>                
+                 <div class="col-xs-4">
+                    Email : <b>{{TransactionDetails.user_email}}</b> <br>
+                    Mobile Number : <b>{{TransactionDetails.user_mobile}}</b><br>
+                    Payment Mode : <b>{{(TransactionDetails.payment_method==1)?"Jio Wallet":((TransactionDetails.payment_method==2)?"Credit Card":"Not Available")}}</b> <br>
+                    Payment Gateway : <b>{{TransactionDetails.payment_gateway}}</b>
+                 </div>               
+              </div>
+              <hr>
+              <div>              
+                <div class="row">
+                  <div class="col-xs-6">                  
+                      Settlement Type : <b>{{(TransactionDetails.settlement_type==1)?"Regular":((TransactionDetails.settlement_type==2)?"Express":"NA")}}</b> <br>
+                      Settlement Status : <b>{{TransactionDetails.settlement_status}}</b>                   
+                  </div>
+                 <div class="col-xs-6">
+                    Amount Recieved : <b>{{TransactionDetails.amount_received}}</b> <br>
+                    Amount Payable : <b>{{TransactionDetails.amount_payable}}</b><br>
+                    Processing Fee Collected : <b>{{TransactionDetails.processing_fee}}</b> <br>
+                    Tax Collected : <b>{{TransactionDetails.tax_fee}}</b>
+                  </div>
+                               
+              </div>
+              <hr>
+               <div>              
+                <div class="row">
+                  <div class="col-xs-6">
+                    Payee Nickname : <b>{{TransactionDetails.bank_account_holder}}</b> <br>
+                    Student Name : <b>Sekhar</b> <br>
+                    Roll No : <b>22</b> <br>
+                   Payment purpose : <b>Bus fee</b> 
+
+                 </div> 
+                 <div class="col-xs-6">
+                    <blockquote style="font-size:14px"> Account Details<br>
+                      <b>  {{TransactionDetails.bank_name}}  <br>
+                        {{TransactionDetails.bank_account_number}}<br>
+                        {{TransactionDetails.ifsc}}<br>
+                        </b>
+                   </blockquote>
+                  </div>        
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>  
+  <div class="row" style="text-align:center" *ngIf="TransactionDetails.status == 0">
+      <p>Error occured... Please try again...</p>
+  </div>
+</div>
