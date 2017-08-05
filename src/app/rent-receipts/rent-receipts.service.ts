@@ -25,4 +25,8 @@ export class RentReceiptService {
     return this._http.post(this.baseUrl+'user/status',this.inputParams,this.requestOptions).map(res=>res.json());
    }
 
+   getStates(){
+        return this._http.post(this.baseUrl+'states',this.inputParams, this.requestOptions).map(res=>res.json());
+    }
+
 }

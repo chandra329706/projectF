@@ -70,7 +70,11 @@
                     </div>
                     <div class="col-xs-12">
                         <section>
-                            <input class="effect-2" type="text" placeholder="State" name="state" #state="ngModel" [(ngModel)]="receipt.state" required>
+                             <select name="state" #state="ngModel" [(ngModel)]="receipt.state" required>
+                                                        <option value="">Select State</option>
+                                                        <option *ngFor="let state of StatesList.data" [ngValue]="state.id">{{state.state_name}}</option>
+                                                </select>
+                            <!--<input class="effect-2" type="text" placeholder="State" name="state" #state="ngModel" [(ngModel)]="receipt.state" required>-->
                             <span class="focus-border"></span>
                             <div *ngIf="state.errors && state.touched" style="color:red">
                                 <span [hidden]="!state.errors['required']">Please enter state</span>
@@ -309,7 +313,7 @@
                             </p>
                             <p class="small-text">(Affix Revenue Stamp of Rs.1/-)</p>
                             <h5><b>{{receipt.owner}}</b> <span class="small-text">(Signature)</span></h5>
-                            <p class="small-text text-right">* T & C Apply www.Flexipay.in</p>
+                            <p class="small-text text-right">Powered by Flexypay</p>
                         </div>
                         <div class="clearfix">&nbsp;</div>
                         <div class="clearfix">&nbsp;</div>

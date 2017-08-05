@@ -17,12 +17,12 @@ export class MaintenanceComponent implements OnInit {
 
   MakeActive : any = true;
   CurrentYear : any = new Date().getFullYear();
-  SelectedYear :any;
-  SelectedMonth : any;
+  SelectedYear :any="";
+  SelectedMonth : any="";
   Remarks : any = "";
 
   MaintainanceListData : any = [];
-  selectedProperty :any;
+  selectedProperty : any = "";
   rentType: any = 1;
   totalMaintainanceDetails : any;
   PaymentGatewayList :any = [];
@@ -33,6 +33,7 @@ export class MaintenanceComponent implements OnInit {
   selectedPaymentMethodId: Number = 5;
   selectedPaymentGateway: Number = 0;
   payMethod : any;
+  showBreakdown: boolean = false;
 
   walletBalance: Number = 0;
   useWalletAmount :boolean = false;
@@ -43,7 +44,8 @@ export class MaintenanceComponent implements OnInit {
   maintenancePropertyName : any = '-';
   Ifsc : any = '-';
   accountNumber : any = '-';
-  Amount : any = '0.00';
+  ActualAmount : any;
+  Amount : any = (this.ActualAmount==NaN || this.ActualAmount==undefined)?0:this.ActualAmount;
   WalletBalance : any = '0.00';
   NameAsPerBank : any ='-';
   TenantName : any = '-';  
@@ -66,6 +68,8 @@ export class MaintenanceComponent implements OnInit {
   DisableUserPay : boolean = false;
 
   ngOnInit() {
+    // console.log('AA >>> '+this.ActualAmount);
+    // console.log('A >>> '+this.Amount);
     this.DisablePay = false;
     this.ActiveMenusData.data = [];
     this.UserStatus =  localStorage.getItem('UserStatus');
@@ -82,7 +86,7 @@ export class MaintenanceComponent implements OnInit {
         }
       });
     });
-    this.selectedProperty = '';
+    // this.selectedProperty = ' ';
     this._maintenanceService.getMaintenanceList().subscribe(cData => this.MaintainanceListData = cData);
     this.walletBalance = Number(localStorage.getItem('currentWalletBalance'));
     this._maintenanceService.getPaymentMethodList().subscribe(pmData =>{
@@ -121,6 +125,8 @@ export class MaintenanceComponent implements OnInit {
   }
 
   checkPaymethod(payMethodObj : any){
+    this.Amount = (this.ActualAmount==NaN || this.ActualAmount==undefined)?0:this.ActualAmount;
+    this.Amount = (this.Amount=="")?0:this.Amount; 
     this.TaxTotal = 0;
     if(payMethodObj!=0){
       if(payMethodObj.id == '6'){
@@ -160,7 +166,7 @@ export class MaintenanceComponent implements OnInit {
       }else{   // tax_type = 1 --> fixed amount
           this.TaxTotal = parseFloat(tax.tax_amount)+parseFloat(this.TaxTotal);
           tax.tax_value = tax.tax_amount;
-      }   
+      }  
     });
     this.TotalAmount = parseFloat(this.ConvenienceFeeAmount)+parseFloat(this.Amount)+parseFloat(this.TaxTotal);
   } 
@@ -220,19 +226,23 @@ export class MaintenanceComponent implements OnInit {
     this._maintenanceService.payFee(this.toSendData).subscribe(res => {
       this.paymentResult = res;
       if(this.paymentResult.status == 1){
-        var PaymetFormDetails = {'TotalAmount':Math.round(this.TotalAmount),'Remarks':(this.Remarks=='')?"Maintenance Fee Payment":this.Remarks,'OrderID':this.paymentResult.transaction_code,'TransactionId':this.paymentResult.transaction_id,'PaymentFor':'Maintenance','UId':localStorage.getItem('currentUserId'),'Signature':localStorage.getItem('currentUserToken')};
+        var PaymetFormDetails = {'TotalAmount':Math.round(this.TotalAmount),'Remarks':(this.Remarks=='')?"Maintenance Fee Payment":this.Remarks,'OrderID':this.paymentResult.transaction_code,'TransactionId':this.paymentResult.transaction_id,'PaymentFor':'Maintenance','PaymentMethod':this.paymentMethod,'UId':localStorage.getItem('currentUserId'),'Signature':localStorage.getItem('currentUserToken')};
         this.paymentComponent.SubmitPaymentDetails(PaymetFormDetails);
       }
     });
   }
-}
 
-/*
-window.onload = function() {
-document.cookie = "signature= "+localStorage.getItem('currentUserToken');
-alert('sdsfsdfdf');
-console.log('vv'+
-document.cookie);
-document.cookie = "userId= "+localStorage.getItem('currentUserId');
+   _keyPress(event: any) {
+      const pattern = /[0-9]/;
+      
+      let inputChar = String.fromCharCode(event.charCode);
+
+      if (!pattern.test(inputChar)) {
+        event.preventDefault();
+      }
+  }
+  showAmountBreakdown(){
+    this.showBreakdown = !this.showBreakdown;
+    console.log('came to function');
+  }
 }
-*/

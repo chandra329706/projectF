@@ -1,4 +1,4 @@
-<h1 *ngIf="UId">Please wait your payment is in process.....</h1>
+<h1 *ngIf="UId">Please wait your payment is being process.....</h1>
 <form ngNoForm action="https://biz.traknpay.in/v1/paymentrequest" name="payment" method="POST" id="PaymentForm">                
     <input type="hidden" [value]="api_key" name="api_key"/>         
     <input type="hidden" [value]="returnUrl" name="return_url"/>         

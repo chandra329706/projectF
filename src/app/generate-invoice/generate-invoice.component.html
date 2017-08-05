@@ -40,7 +40,33 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">Date</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="date" #date="ngModel" [(ngModel)]="mainData.date" placeholder="Date">
+                                                <!-- Date HTML Start -->
+                                                <!-- <select class="form-control fix3selects" name="year" #year="ngModel" [(ngModel)]="dateData.year" (change)="getMonths()" required>
+                                                    <option *ngFor="let year of dateData.getYears" [value]="year.value">{{year.name}}</option>
+                                                </select>
+                                                <select class="form-control fix3selects" name="month" #month="ngModel" [(ngModel)]="dateData.month" (change)="getDays()" required>
+                                                    <option *ngFor="let month of dateData.getMonths" [value]="month.value">{{month.name}}</option>
+                                                </select>
+                                                <select class="form-control fix3selects" name="day" #day="ngModel" [(ngModel)]="dateData.day" (change)="createDate()" required>
+                                                    <option *ngFor="let day of dateData.getDays" [value]="day.value">{{day.name}}</option>
+                                                </select>
+                                                <div *ngIf="year.touched && (year.errors || year.invalid)" class="">
+                                                    <div *ngIf="year.errors['required']">
+                                                        <p class="error-text">Please enter the Year</p>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="month.touched && (month.errors || month.invalid)" class="">
+                                                    <div *ngIf="month.errors['required']">
+                                                        <p class="error-text">Please enter the Month</p>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="day.touched && (day.errors || day.invalid)" class="">
+                                                    <div *ngIf="day.errors['required']">
+                                                        <p class="error-text">Please enter the Day</p>
+                                                    </div>
+                                                </div> -->
+                                                <!-- Date HTML end -->
+                                                <p style="font-size: 14px; font-weight: bold; padding-top: 9px">{{today | date}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -231,10 +257,10 @@
                             <div class="text-center">
                                 <label><h4><span class="orange"><b>Who will pay the processing fee</b></span></h4></label>
                                 <label class="radio-inline">
-                                  <input type="radio" name="payer" #payer="ngModel" [(ngModel)]="mainData.payer" value="sender" required>Request Sender
+                                  <input type="radio" name="payer" #payer="ngModel" [(ngModel)]="mainData.payer" value="sender" required><ng-container *ngIf="from.name!=undefined||from.name!=''">{{from.name}}</ng-container><ng-container *ngIf="from.name==undefined || from.name==''">Sender</ng-container>
                                 </label>
                                 <label class="radio-inline">
-                                  <input type="radio" name="payer" #payer="ngModel" [(ngModel)]="mainData.payer" value="receiver" required>Request Reciever
+                                  <input type="radio" name="payer" #payer="ngModel" [(ngModel)]="mainData.payer" value="receiver" required><ng-container *ngIf="to.name!=undefined||to.name!=''">{{to.name}}</ng-container><ng-container *ngIf="to.name==undefined || to.name==''">Receiver</ng-container>
                                 </label>
                             </div>
                         </div>

@@ -30,7 +30,8 @@ export class SchoolFeeComponent implements OnInit {
   NameAsperBank : any = '-';
   Ifsc : any = '-';
   accountNumber : any = '-';
-  Amount : any = 0;
+  ActualAmount : any;
+  Amount : any = (this.ActualAmount==NaN || this.ActualAmount==undefined)?0:this.ActualAmount;
   WalletBalance : any = '0.00';
   Class : any = '-';
   State : any = '-';
@@ -64,12 +65,12 @@ export class SchoolFeeComponent implements OnInit {
   ActiveMenusData: any =[];
   IsMenuActive : any;
   DisableUserPay : boolean = false;
+  PaymentGatewayListCount = 0;
 
   constructor(private _schoolfeeservice : SchoolFeeService, private route:ActivatedRoute) {
    }
 
   ngOnInit() {
-    //console.log(localStorage.getItem('currentUserToken'));
     
     this.DisablePay = false;
     this.UserStatus = localStorage.getItem('UserStatus');
@@ -81,8 +82,6 @@ export class SchoolFeeComponent implements OnInit {
       this.selectedSchool = this.SchId;
       this._schoolfeeservice.checkActiveMenus().subscribe(MData => {
       this.ActiveMenusData = MData; 
-      console.log(this.ActiveMenusData);
-         
       this.IsMenuActive = 0;   
       this.UserStatus = this.ActiveMenusData.user_status;
       if(this.UserStatus == 1 || this.UserStatus == 6){
@@ -97,11 +96,13 @@ export class SchoolFeeComponent implements OnInit {
     this.walletBalance = Number(localStorage.getItem('currentWalletBalance'));
     this._schoolfeeservice.getSchoolsList().subscribe(sData => {
       this.SchoolsListData = sData;
+      console.log('Schools list data');
+      console.log(this.SchoolsListData);
     });
     this._schoolfeeservice.getSchoolsPurposeList().subscribe(spData => {
       this.SchoolsPurposeListData = spData;
     });
-    this._schoolfeeservice.getPaymentGatewayList().subscribe(pgData => { this.PaymentGatewayList = pgData; this.checkPaymentGateway(this.PaymentGatewayList.data[0].id);});
+    this._schoolfeeservice.getPaymentGatewayList().subscribe(pgData => { this.PaymentGatewayList = pgData; this.PaymentGatewayListCount= this.PaymentGatewayList.data; this.checkPaymentGateway(this.PaymentGatewayList.data[0].id);});
     this._schoolfeeservice.getPaymentMethodList().subscribe(pmData =>{
       this.PaymentMethodList = pmData;
       if(this.PaymentMethodList.status == 1){
@@ -128,7 +129,6 @@ export class SchoolFeeComponent implements OnInit {
         
         
         this.SettlementTypes.data.forEach(settlementType => {
-
               if(settlementType.id==this.SelectedSettlementAmountID){
                 this.SelectedSettlementAmountType = settlementType.amount_type;
                 this.SelectedSettlementAmountID = settlementType.id;
@@ -169,6 +169,8 @@ export class SchoolFeeComponent implements OnInit {
   }
 
   checkPaymethod(payMethodObj : any, settlementTypeObj : any){
+    this.Amount = (this.ActualAmount==NaN || this.ActualAmount==undefined)?0:this.ActualAmount;
+    this.Amount = (this.Amount=="")?0:this.Amount;
     this.TaxTotal = 0;
     if(payMethodObj!=0){
       this.paymentTypeCFcal(payMethodObj);
@@ -192,7 +194,6 @@ export class SchoolFeeComponent implements OnInit {
         this.walletAmountUsed = this.ConvenienceFeeAmount*this.wallet.percentage/100;
         this.ConvenienceFeeAmount = this.ConvenienceFeeAmount-(this.walletAmountUsed);
         this.walletBalance = Number(this.walletBalance) - this.walletAmountUsed;
-        console.log("came into the wallet ");
       }
       else 
       {
@@ -271,6 +272,19 @@ export class SchoolFeeComponent implements OnInit {
     this.SelectedSettlementAmountID = settlementTypeObj.id;
     this.SelectedSettlementAmountValue = settlementTypeObj.value;
   }
+
+  _keyPress(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
+    // console.log('sdfsfsdfsdf');
+    
+    let inputChar = String.fromCharCode(event.charCode);
+
+    if (!pattern.test(inputChar)) {
+      // console.log('sdfsfsdfsdf1');
+      // invalid character, prevent input
+      event.preventDefault();
+    }
+}
 
 
 }

@@ -47,7 +47,7 @@ export class TransactionHistoryComponent implements OnInit {
 
   download_transaction(transaction_id : any){
     this._transactionHistoryService.download_transaction(transaction_id).subscribe(download => {
-      let rawData = new Blob([download],{type: 'application/pdf'});
+      let rawData = new Blob([download],{type: 'application/octet-stream'});
       fileSaver.saveAs(rawData, 'transaction.pdf');
     });
   }

@@ -12,18 +12,19 @@ export class AddBeneficiaryComponent{
 
   addBankAccount: any = {};
   addBankAccountResult: any = {};
-  addHouseRentProperty: any = {};
+  addHouseRentProperty: any = {'property_type':'','reminder_day':'','state':''};
   addHouseRentPropertyResult: any;
-  monthlyMaintenanceProperty: any = {};
+  monthlyMaintenanceProperty: any = {'property_type':'','reminder_day':'','state':''};
   monthlyMaintenancePropertyResult: any = {};
-  addSchool: any = {};
+  addSchool: any = {'state':''};
   addSchoolResult: any ={};
-  addCollege: any = {};
+  addCollege: any = {'state':''};
   addCollegeResult: any = {};
   dates: any;
   TnC: boolean = false;
   operationResult: any = {};
   UserStatus : any;
+  StatesList :any = [];
  
 
 
@@ -36,7 +37,13 @@ export class AddBeneficiaryComponent{
     for(var i=1;i<32;i++) this.dates.push(i);
     this._AddBeneficiaryService.checkUserStatus().subscribe(data=>{
       this.UserStatus=data.user_status;
-      console.log('User Status >>'+this.UserStatus)
+      // console.log('User Status >>'+this.UserStatus)
+    });
+    this._AddBeneficiaryService.getStates().subscribe(sdata=>{
+      if(sdata.status==1){
+        this.StatesList = sdata;
+      }
+      
     });
   }
 

@@ -29,7 +29,8 @@ export class CollegeFeeComponent implements OnInit {
   NameAsperBank : any = '-';
   Ifsc : any = '-';
   accountNumber : any = '-';
-  Amount : any = '0.00';
+  ActualAmount : any;
+  Amount : any = (this.ActualAmount==NaN || this.ActualAmount==undefined)?0:this.ActualAmount;
   Group : any = '-';
   State : any = '-';
   Section : any = '-';
@@ -151,6 +152,8 @@ export class CollegeFeeComponent implements OnInit {
   }
 
   checkPaymethod(payMethodObj : any){
+    this.Amount = (this.ActualAmount==NaN || this.ActualAmount==undefined)?0:this.ActualAmount;
+    this.Amount = (this.Amount=="")?0:this.Amount;
     this.TaxTotal = 0;
     // console.log(payMethodObj);
     
@@ -232,6 +235,19 @@ export class CollegeFeeComponent implements OnInit {
         this.paymentComponent.SubmitPaymentDetails(PaymetFormDetails);
       }
     });
+  }
+
+   _keyPress(event: any) {
+      const pattern = /[0-9\+\-\ ]/;
+      // console.log('sdfsfsdfsdf');
+      
+      let inputChar = String.fromCharCode(event.charCode);
+
+      if (!pattern.test(inputChar)) {
+        // console.log('sdfsfsdfsdf1');
+        // invalid character, prevent input
+        event.preventDefault();
+      }
   }
 
 

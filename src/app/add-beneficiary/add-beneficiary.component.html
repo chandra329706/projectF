@@ -28,7 +28,7 @@
                         </h4><br>
                         <!-- Add Beneficiary Details Starts -->
                         <div>
-                            <form #addBankAccountForm="ngForm" novalidate>
+                            <form autocomplete="off" #addBankAccountForm="ngForm" novalidate>
                                 <div class="row">
                                     <div class="col-lg-6 bdr-rgt">
                                         <div class="col-md-12">
@@ -44,7 +44,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <section>
-                                                <input class="effect-2" type="text" pattern="^[0-9]*$" name="BAaccNo" #BAaccNo="ngModel" [(ngModel)]="addBankAccount.bank_account_number" placeholder="Account Number" required>
+                                                <input class="effect-2" type="password" pattern="^[0-9]*$" name="BAaccNo" #BAaccNo="ngModel" [(ngModel)]="addBankAccount.bank_account_number" placeholder="Account Number" required>
                                                 <span class="focus-border"></span>
                                                 <div *ngIf="BAaccNo.touched && (BAaccNo.errors || BAaccNo.invalid)">
                                                     <div *ngIf="BAaccNo.errors['required']">
@@ -160,12 +160,12 @@
                         </h4>
                         <!-- Add Beneficiary Details Starts -->
                         <div>
-                            <form #addHouseRentPropertyForm="ngForm" novalidate>
+                            <form autocomplete="off" #addHouseRentPropertyForm="ngForm" novalidate>
                                 <div class="row"> <br>
                                     <div class="col-lg-6 bdr-rgt">
                                         <div class="col-md-12">
-                                            <select class="cs-select cs-skin-elastic" name="rentPropertyType" #rentPropertyType="ngModel" [(ngModel)]="addHouseRentProperty.property_type" required>
-                                                <option disabled>Type of Property</option>
+                                            <select name="rentPropertyType" #rentPropertyType="ngModel" [(ngModel)]="addHouseRentProperty.property_type" required>
+                                                <option value="">Type of Property</option>
                                                 <option value="1">Residential</option>
                                                 <option value="2">Commercial</option>
                                             </select>
@@ -247,7 +247,11 @@
                                         </div>
                                         <div class="col-md-12">
                                             <section>
-                                                <input class="effect-2" type="text" name="state" #state="ngModel" [(ngModel)]="addHouseRentProperty.state" placeholder="State" required>
+                                                <select name="state" #state="ngModel" [(ngModel)]="addHouseRentProperty.state" required>
+                                                        <option value="">Select State</option>
+                                                        <option *ngFor="let state of StatesList.data" [ngValue]="state.id">{{state.state_name}}</option>
+                                                </select>
+                                                <!--<input class="effect-2" type="text" name="state" #state="ngModel" [(ngModel)]="addHouseRentProperty.state" placeholder="State" required>-->
                                                 <span class="focus-border"></span>
                                                 <div *ngIf="state.touched && (state.invalid || state.errors)">
                                                     <div *ngIf="state.errors['required']">
@@ -256,13 +260,15 @@
                                                 </div>
                                             </section>
                                         </div>
+                                        <div class="clearfix"></div><br/>
                                         <div class="col-md-12">
                                             <section>
-                                                <form class="form-inline">
+                                                <form autocomplete="off" class="form-inline">
                                                     <div class="form-group pull-left">
                                                         <label for="Date" style="padding:10px 0">Remainder date : </label>
                                                         <select style="width:auto" name="reminderDate" #reminderDate="ngModel" [(ngModel)]="addHouseRentProperty.reminder_day" required>
-                                                            <option value="" disabled selected>Date</option>
+                                                            <option value="" selected>Date</option>
+                                                            <option value="0" selected>None</option>
                                                             <option *ngFor="let i of dates" [ngValue]="i">{{i}}</option>
                                                         </select>
                                                         <div *ngIf="reminderDate.touched && (reminderDate.invalid || reminderDate.errors)">
@@ -322,7 +328,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <section>
-                                                <input class="effect-2" type="text" pattern="^[0-9]*$" name="accNo" #accNo="ngModel" [(ngModel)]="addHouseRentProperty.bank_account_number" placeholder="Account Number" required>
+                                                <input class="effect-2" type="password" pattern="^[0-9]*$" name="accNo" #accNo="ngModel" [(ngModel)]="addHouseRentProperty.bank_account_number" placeholder="Account Number" required>
                                                 <span class="focus-border"></span>
                                                 <div *ngIf="accNo.touched && (accNo.errors || accNo.invalid)">
                                                     <div *ngIf="accNo.errors['required']">
@@ -418,12 +424,12 @@
                         </h4>
                         <!-- Add Beneficiary Details Starts -->
                         <div>
-                            <form #addMonthlyMaintenanceForm="ngForm" novalidate>
+                            <form autocomplete="off" #addMonthlyMaintenanceForm="ngForm" novalidate>
                                 <div class="row"> <br>
                                     <div class="col-lg-6 bdr-rgt">
                                         <div class="col-md-12">
                                             <select class="cs-select cs-skin-elastic" name="maintRentType" #maintRentType="ngModel" [(ngModel)]="monthlyMaintenanceProperty.property_type" required>
-                                                <option disabled>Type of Property</option>
+                                                <option value="">Type of Property</option>
                                                 <option value="1">Residential</option>
                                                 <option value="2">Commercial</option>
                                             </select>
@@ -505,7 +511,11 @@
                                         </div>
                                         <div class="col-md-12">
                                             <section>
-                                                <input class="effect-2" type="text" name="maintstate" #maintstate="ngModel" [(ngModel)]="monthlyMaintenanceProperty.state" placeholder="State" required>
+                                                 <select name="maintstate" #maintstate="ngModel" [(ngModel)]="monthlyMaintenanceProperty.state" required>
+                                                        <option value="">Select State</option>
+                                                        <option *ngFor="let state of StatesList.data" [ngValue]="state.id">{{state.state_name}}</option>
+                                                </select>
+                                                <!--<input class="effect-2" type="text" name="maintstate" #maintstate="ngModel" [(ngModel)]="monthlyMaintenanceProperty.state" placeholder="State" required>-->
                                                 <span class="focus-border"></span>
                                                 <div *ngIf="maintstate.touched && (maintstate.invalid || maintstate.errors)">
                                                     <div *ngIf="maintstate.errors['required']">
@@ -514,13 +524,15 @@
                                                 </div>
                                             </section>
                                         </div>
+                                        <div class="clearfix"></div><br/>
                                         <div class="col-md-12">
                                             <section>
-                                                <form class="form-inline">
+                                                <form autocomplete="off" class="form-inline">
                                                     <div class="form-group pull-left">
                                                         <label for="Date" style="padding:10px 0">Remainder date : </label>
                                                         <select style="width:auto" name="maintreminderDate" #maintreminderDate="ngModel" [(ngModel)]="monthlyMaintenanceProperty.reminder_day" required>
-                                                            <option value="" disabled selected>Date</option>
+                                                            <option value="" selected>Date</option>
+                                                            <option value="0">None</option>
                                                             <option *ngFor="let i of dates" [ngValue]="i">{{i}}</option>
                                                         </select>
                                                         <div *ngIf="maintreminderDate.touched && (maintreminderDate.invalid || maintreminderDate.errors)">
@@ -580,7 +592,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <section>
-                                                <input class="effect-2" type="text" pattern="^[0-9]*$" name="maintaccNo" #maintaccNo="ngModel" [(ngModel)]="monthlyMaintenanceProperty.bank_account_number" placeholder="Account Number" required>
+                                                <input class="effect-2" type="password" pattern="^[0-9]*$" name="maintaccNo" #maintaccNo="ngModel" [(ngModel)]="monthlyMaintenanceProperty.bank_account_number" placeholder="Account Number" required>
                                                 <span class="focus-border"></span>
                                                 <div *ngIf="maintaccNo.touched && (maintaccNo.errors || maintaccNo.invalid)">
                                                     <div *ngIf="maintaccNo.errors['required']">
@@ -662,7 +674,7 @@
                         </h4>
                         <!-- Add Beneficiary Details Starts -->
                         <div>
-                            <form #addSchoolForm="ngForm" novalidate>
+                            <form autocomplete="off" #addSchoolForm="ngForm" novalidate>
                                 <div class="row"><br>
                                     <div class="col-lg-4 bdr-rgt">
                                         <div class="col-md-12">
@@ -722,6 +734,21 @@
                                         </div>
                                         <div class="col-md-12">
                                             <section>
+                                                <select name="sclState" #sclState="ngModel" [(ngModel)]="addSchool.state" required>
+                                                        <option value="">Select State</option>
+                                                        <option *ngFor="let state of StatesList.data" [ngValue]="state.id">{{state.state_name}}</option>
+                                                </select>
+                                                <!--<input class="effect-2" type="text" name="sclState" #sclState="ngModel" [(ngModel)]="addSchool.state" placeholder="State" required>-->
+                                                <span class="focus-border"></span>
+                                                <div *ngIf="sclState.touched && (sclState.invalid || sclState.errors)">
+                                                    <div *ngIf="sclState.errors['required']">
+                                                        <p class="error-text">Please enter the state</p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <section>
                                                 <input class="effect-2" type="text" name="sclPin" #sclPin="ngModel" pattern="^[0-9]*$" [(ngModel)]="addSchool.pincode" placeholder="Pincode" required>
                                                 <span class="focus-border"></span>
                                                 <div *ngIf="sclPin.touched && (sclPin.invalid || sclPin.errors)">
@@ -734,17 +761,7 @@
                                                 </div>
                                             </section>
                                         </div>
-                                        <div class="col-md-12">
-                                            <section>
-                                                <input class="effect-2" type="text" name="sclState" #sclState="ngModel" [(ngModel)]="addSchool.state" placeholder="State" required>
-                                                <span class="focus-border"></span>
-                                                <div *ngIf="sclState.touched && (sclState.invalid || sclState.errors)">
-                                                    <div *ngIf="sclState.errors['required']">
-                                                        <p class="error-text">Please enter the state</p>
-                                                    </div>
-                                                </div>
-                                            </section>
-                                        </div>
+                                        
                                     </div>
                                     <div class="col-lg-4 bdr-rgt">
                                         <div class="col-md-12">
@@ -828,7 +845,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <section>
-                                                <input class="effect-2" type="text" pattern="^[0-9]*$" name="sclBAN" #sclBAN="ngModel" [(ngModel)]="addSchool.bank_account_number" placeholder="Account Number" required>
+                                                <input class="effect-2" type="password" pattern="^[0-9]*$" name="sclBAN" #sclBAN="ngModel" [(ngModel)]="addSchool.bank_account_number" placeholder="Account Number" required>
                                                 <span class="focus-border"></span>
                                                 <div *ngIf="sclBAN.touched && (sclBAN.errors || sclBAN.invalid)">
                                                     <div *ngIf="sclBAN.errors['required']">
@@ -908,7 +925,7 @@
                         <!-- Add Beneficiary Details Starts -->
 
                         <div>
-                            <form #collegeForm="ngForm" novalidate>
+                            <form autocomplete="off" #collegeForm="ngForm" novalidate>
                                 <div class="row"><br>
                                     <div class="col-lg-4 bdr-rgt">
                                         <div class="col-md-12">
@@ -982,7 +999,11 @@
                                         </div>
                                         <div class="col-md-12">
                                             <section>
-                                                <input class="effect-2" type="text" name="clgState" #clgState="ngModel" [(ngModel)]="addCollege.state" placeholder="State" required>
+                                                <select name="clgState" #clgState="ngModel" [(ngModel)]="addCollege.state" required>
+                                                        <option value="">Select State</option>
+                                                        <option *ngFor="let state of StatesList.data" [ngValue]="state.id">{{state.state_name}}</option>
+                                                </select>
+                                                <!--<input class="effect-2" type="text" name="clgState" #clgState="ngModel" [(ngModel)]="addCollege.state" placeholder="State" required>-->
                                                 <span class="focus-border"></span>
                                                 <div *ngIf="clgState.touched && (clgState.invalid || clgState.errors)">
                                                     <div *ngIf="clgState.errors['required']">
@@ -1074,7 +1095,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <section>
-                                                <input class="effect-2" type="text" pattern="^[0-9]*$" name="clgBAN" #clgBAN="ngModel" [(ngModel)]="addCollege.bank_account_number" placeholder="Account Number" required>
+                                                <input class="effect-2" type="password" pattern="^[0-9]*$" name="clgBAN" #clgBAN="ngModel" [(ngModel)]="addCollege.bank_account_number" placeholder="Account Number" required>
                                                 <span class="focus-border"></span>
                                                 <div *ngIf="clgBAN.touched && (clgBAN.errors || clgBAN.invalid)">
                                                     <div *ngIf="clgBAN.errors['required']">

@@ -41,7 +41,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { RewardsComponent } from './rewards/rewards.component';
 import { AuthGuard } from './shared/guards/auth-guard.service';
 import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
-import {ShareModule} from 'ng2share/share.module'
+import {ShareModule} from 'ng2share/share.module';
+import { ClickOutside } from './navbar/click-outside.directive';
 
 
 @NgModule({ 
@@ -73,7 +74,8 @@ import {ShareModule} from 'ng2share/share.module'
     PaymentComponentComponent,
     PaymentResponseComponent,
     ChangePasswordComponent,
-    RewardsComponent
+    RewardsComponent,
+    ClickOutside
   ],
   imports: [
     BrowserModule,

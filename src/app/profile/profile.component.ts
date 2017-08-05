@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from './profile.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -20,12 +21,13 @@ export class ProfileComponent implements OnInit {
   UserPancard : any = "";
   PanCardLink : any= "";
 
-  constructor(private _ProfileService: ProfileService) { }
+  constructor(private _ProfileService: ProfileService, private router: Router) { }
 
   ngOnInit() {
     this.getProfileData();
     this.sendProfileResult.message = '';
     this.UserStatus = localStorage.getItem('UserStatus');
+    this.profileData.pincode = '';
   }
 
   UploadPic(File:any,pic_type){
@@ -85,7 +87,9 @@ export class ProfileComponent implements OnInit {
     console.log(this.profileDataTemp);
     
     
-    this._ProfileService.sendProfileData(this.profileData).subscribe(res=>{this.sendProfileResult = res; console.log(this.sendProfileResult)});
+    this._ProfileService.sendProfileData(this.profileData).subscribe(res=>{this.sendProfileResult = res; console.log(this.sendProfileResult); 
+      
+    });
   }
 
   getProfileData(){
@@ -107,5 +111,9 @@ export class ProfileComponent implements OnInit {
   getCoverPhoto(){
     return 'http://api.flexypay.in/public/uploads/user/coverpic/14972468894889.gif';//+this.profileData.cover_photo;
   }
+
+  redirectHome() {
+    if (this.sendProfileResult.status == 1) this.router.navigate(['makepayments'])
+  };
 
 }

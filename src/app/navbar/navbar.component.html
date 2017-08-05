@@ -14,7 +14,7 @@
                 <li class=" dropdown " [class.open]="dropdownOpened"><a class="dropdown-toggle"  (click)="dropdownOpened = !dropdownOpened" data-toggle="dropdown " role="button " aria-haspopup="true " aria-expanded="false" [attr.aria-expanded]="dropdownOpened ? 'true': 'false' "><i class="fa fa-user fa-lg "></i>
               &nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down " aria-hidden="true "></i></a>
                     <ul class="dropdown-menu settings-menu ">
-                        <li><a [routerLink]="['profile']"><i class="fa fa-user fa-lg "></i>My Profile</a></li>
+                        <li><a [routerLink]="['profile']" (click)="dropdownOpened = !dropdownOpened"><i class="fa fa-user fa-lg "></i>My Profile</a></li>
                         <li><a (click)="UserLogout()"><i class="fa fa-sign-out fa-lg "></i> Logout</a></li>
                     </ul>
                 </li>

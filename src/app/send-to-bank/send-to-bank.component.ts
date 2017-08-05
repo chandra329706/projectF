@@ -21,7 +21,7 @@ export class SendToBankComponent implements OnInit {
   DisablePay: boolean;
   UserListData : any = [];
   UserPurposeListData : any = [];
-  selectedUser :any;
+  selectedUser :any = "";
   totalUserDetails : any;
   PaymentGatewayList :any = [];
   PaymentMethodList : any =[];
@@ -31,7 +31,8 @@ export class SendToBankComponent implements OnInit {
   userName : any = '-';
   Ifsc : any = '-';
   accountNumber : any = '-';
-  Amount : any = '0.00';
+  ActualAmount : any;
+  Amount : any = (this.ActualAmount==NaN || this.ActualAmount==undefined)?0:this.ActualAmount;
   WalletBalance : any = '0.00';
   BankName : any ='-';
   settlementAmount : any = 0;
@@ -59,9 +60,7 @@ export class SendToBankComponent implements OnInit {
   DisableUserPay ; boolean = false;
 
 
-  ngOnInit() {
-    console.log('fsdfsddf');
-    
+  ngOnInit() {    
     this.selectedPurpose = "";
     this.selectedUser = '';
     this.DisablePay = false;
@@ -137,6 +136,8 @@ export class SendToBankComponent implements OnInit {
   }
 
   checkPaymethod(payMethodObj : any){
+    this.Amount = (this.ActualAmount==NaN || this.ActualAmount==undefined)?0:this.ActualAmount;
+    this.Amount = (this.Amount=="")?0:this.Amount;
     this.TaxTotal = 0;
     if(payMethodObj!=0){
       if(payMethodObj.id == '6'){
@@ -223,11 +224,11 @@ export class SendToBankComponent implements OnInit {
     this.toSendData.coupon_id = this.coupon;
     this.toSendData.taxis = taxes;
     this.toSendData.coupon_id = 0;
-    this.toSendData.purpose = this.selectedPurpose;
+    // this.toSendData.purpose = this.selectedPurpose;
+    this.toSendData.purpose = this.Remarks;
     // console.log(this.toSendData);
     this._bankService.payFee(this.toSendData).subscribe(res => {
       this.paymentResult = res;
-      
       // console.log(this.paymentResult);
       if(this.paymentResult.status == 1){
         // this.DisablePay = false;  
@@ -236,5 +237,18 @@ export class SendToBankComponent implements OnInit {
       }
     });
   }
+
+  _keyPress(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
+    // console.log('sdfsfsdfsdf');
+    
+    let inputChar = String.fromCharCode(event.charCode);
+
+    if (!pattern.test(inputChar)) {
+      // console.log('sdfsfsdfsdf1');
+      // invalid character, prevent input
+      event.preventDefault();
+    }
+}
 
 }

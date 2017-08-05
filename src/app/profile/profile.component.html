@@ -27,8 +27,11 @@
         </div>
         <div class="col-md-12" style="padding:2%; background: #fff">
 
-            <div class="row text-center">
-                <div class="col-md-8">
+            <div class="row text-center" style="border:1px dashed #b7b7b7">
+                <div class="clearfix">&nbsp;</div>
+                <h3 class="orange">KYC Details</h3>
+                <div class="clearfix">&nbsp;</div>
+                <div class="col-md-12">
                     <form #profileForm="ngForm" novalidate>
                         <div class="row">
                             <div class="col-md-6 bdr-rgt">
@@ -224,6 +227,14 @@
                         </div>
                     </form>
                 </div>
+                <div class="clearfix">&nbsp;</div>
+            </div>
+
+            <div class="clearfix">&nbsp;</div>
+            <div class="row text-center" style="border:1px dashed #b7b7b7">
+                <div class="clearfix">&nbsp;</div>
+                <h3 class="orange">Bank Details</h3>
+                <div class="clearfix">&nbsp;</div>
                 <div class="col-md-4">
                     <form bankDetailsUpdate="ngForm" novalidate>
                         <div class="col-xs-12">
@@ -261,7 +272,7 @@
                         </div>
                         <div class="col-xs-12">
                             <section>
-                                <input class="effect-2" type="text" name="ban" #ban="ngModel" [(ngModel)]="profileData.bank_account_number" pattern="^[0-9]*$" placeholder="Account Number" required>
+                                <input class="effect-2" type="password" name="ban" #ban="ngModel" [(ngModel)]="profileData.bank_account_number" pattern="^[0-9]*$" placeholder="Account Number" required>
                                 <span class="focus-border"></span>
                                 <div *ngIf="ban.touched && (ban.errors || ban.invalid)">
                                     <div *ngIf="ban.errors['required']">
@@ -297,6 +308,8 @@
                         </div>
                     </form>
                 </div>
+                <div class="clearfix">&nbsp;</div>
+                <div class="clearfix">&nbsp;</div>
             </div>
         </div>
     </div>
@@ -320,7 +333,7 @@
             </div>
             <div class="modal-footer">
                 <div class="text-center">
-                    <button class="btn btn-success" data-dismiss="modal">Close</button>
+                    <button class="btn btn-success" data-dismiss="modal" (click)="redirectHome()">Close</button>
                 </div>
             </div>
             <div class="clearfix">&nbsp;</div>

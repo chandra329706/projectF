@@ -22,7 +22,7 @@
                             <div class="col-md-6">
                                 <section style="border:1px dashed #b7b7b7">
                                     <select class="cs-select cs-skin-elastic" name="selectedUserVal" #selectedUserVal="ngModel" [(ngModel)]="selectedUser" (change)="getBUserDetails()" required>
-                                    <option value="">Select User</option>
+                                    <option value="" selected>Select User</option>
                                     <option *ngFor="let user of UserListData.data" [value]="user.Id">{{user.BeneficiaryName}}</option>
                                 </select>
                                 </section>
@@ -32,7 +32,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <!--<div class="col-md-6">
                                 <section style="border:1px dashed #b7b7b7">
                                     <select class="cs-select cs-skin-elastic" name="selectedPurposeVal" #selectedPurposeVal="ngModel" [(ngModel)]="selectedPurpose" required>
                                      <option value="">Select Purpose</option>
@@ -58,33 +58,35 @@
                                         </div>
                                     </div>
                                 </section>
-                            </div>
+                            </div>-->
+
 
                             <div class="col-md-6">
                                 <section>
-                                    <input class="effect-2" type="text" name="AmountVal" pattern="^(?:[2-9]|[2-9]\.\d*|[1-9]\d\d*|[1-9]\d\d*\.\d*)$" #AmountVal="ngModel" placeholder="Amount" [(ngModel)]="Amount" (keyup)="checkPaymethod(0,0)" required>
+                                    <input class="effect-2" type="text" placeholder="Purpose" [(ngModel)]="Remarks" name="remarks" #remarks="ngModel" required>
+                                    <span class="focus-border"></span>
+                                    <div *ngIf="remarks.touched && (remarks.errors || remarks.invalid)" class="">
+                                        <div *ngIf="remarks.errors['required']">
+                                            <p class="error-text">Please enter the your purpose</p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="col-md-6">
+                                <section>
+                                    <input class="effect-2" type="text" name="AmountVal" pattern="^(?:[1-9]\d\d\d\d*|[1-9]\d\d\d*\.\d*)$" #AmountVal="ngModel" placeholder="Amount" [(ngModel)]="ActualAmount" (keyup)="checkPaymethod(0,0)" (keypress)="_keyPress($event)" required>
                                     <span class="focus-border"></span>
                                     <div *ngIf="AmountVal.touched && (AmountVal.errors || AmountVal.invalid)" class="">
                                         <div *ngIf="AmountVal.errors['required']">
                                             <p class="error-text">Please enter the amount</p>
                                         </div>
                                         <div *ngIf="AmountVal.errors['pattern']">
-                                            <p class="error-text">Please enter amount greater than 2 <span style="font-family:arial">&#x20B9;</span></p>
+                                            <p class="error-text">Please enter amount greater than 999<span style="font-family:arial">&#x20B9;</span></p>
                                         </div>
                                     </div>
                                 </section>
                             </div>
-                            <div class="col-md-6">
-                                <section>
-                                    <input class="effect-2" type="text" placeholder="Remarks" [(ngModel)]="Remarks" name="remarks" #remarks="ngModel" required>
-                                    <span class="focus-border"></span>
-                                    <div *ngIf="remarks.touched && (remarks.errors || remarks.invalid)" class="">
-                                        <div *ngIf="remarks.errors['required']">
-                                            <p class="error-text">Please enter the remarks</p>
-                                        </div>
-                                    </div>
-                                </section>
-                            </div>
+
                         </div>
 
                     </div>
@@ -120,7 +122,7 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="payMethod == '6'">
+                    <div *ngIf="payMethod == '6' && PaymentGatewayList.data.length>1">
 
                         <h3 style="line-height: 0.1;padding-right: 20px;"><small><span class="orange"><b>Payment Gateway</b></span></small></h3>
                         <div class="row">
@@ -156,6 +158,11 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="clearfix">&nbsp;</div>
+                    <div class="clearfix">&nbsp;</div>
+                    <div class="row">
+                        Bank Account not found? Add it <a type="button" [routerLink]="['/addbeneficiary']" class="btn btn-primary">Here</a>
                     </div>
 
 

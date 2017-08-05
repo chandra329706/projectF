@@ -36,4 +36,8 @@ export class RequestLoanService {
     checkActiveMenus(){
         return this._http.post(this.baseUrl+'services',this.inputParams,this.requestOptions).map(res=>res.json());
     }
+
+    getStates(){
+        return this._http.post(this.baseUrl+'states',this.inputParams, this.requestOptions).map(res=>res.json());
+    }
 }

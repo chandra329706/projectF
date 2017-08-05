@@ -62,14 +62,14 @@
 
                             <div class="col-md-6">
                                 <section>
-                                    <input class="effect-2" type="text" placeholder="Amount" name="Amount" pattern="^(?:[2-9]|[2-9]\.\d*|[1-9]\d\d*|[1-9]\d\d*\.\d*)$" #AmountVal="ngModel" [(ngModel)]="Amount" (keyup)="checkPaymethod(0)" required>
+                                    <input class="effect-2" type="text" placeholder="Amount" name="Amount" pattern="^(?:[1-9]\d\d\d\d*|[1-9]\d\d\d*\.\d*)$" #AmountVal="ngModel" [(ngModel)]="ActualAmount" (keyup)="checkPaymethod(0)" (keypress)="_keyPress($event)" required>
                                     <span class="focus-border"></span>
                                     <div *ngIf="AmountVal.touched && (AmountVal.errors || AmountVal.invalid)" class="">
                                         <div *ngIf="AmountVal.errors['required']">
                                             <p class="error-text">Please enter the amount</p>
                                         </div>
                                         <div *ngIf="AmountVal.errors['pattern']">
-                                            <p class="error-text">Please enter amount greater than 2 <span style="font-family:arial">&#x20B9;</span></p>
+                                            <p class="error-text">Please enter amount greater than 999<span style="font-family:arial">&#x20B9;</span></p>
                                         </div>
                                     </div>
                                 </section>
@@ -113,7 +113,7 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="payMethod == '7' || payMethod == '6'">
+                    <div *ngIf="(payMethod == '7' || payMethod == '6') && PaymentGatewayList.data.length>1">
                         <h3 style="line-height: 0.1;padding-right: 20px;"><small><span class="orange"><b>Payment Gateway</b></span></small></h3>
                         <div class="row">
                             <div>
@@ -146,6 +146,11 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="clearfix">&nbsp;</div>
+                    <div class="clearfix">&nbsp;</div>
+                    <div class="row">
+                        College Beneficiary not found? Add it <a type="button" [routerLink]="['/addbeneficiary']" class="btn btn-primary">Here</a>
                     </div>
 
 

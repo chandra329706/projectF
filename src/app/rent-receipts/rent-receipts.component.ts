@@ -15,7 +15,8 @@ export class RentReceiptsComponent implements OnInit {
 
   UserStatus : any;
   Disabled : boolean = false;
-  receipt: any = {}
+  receipt: any = {'state':''}
+  StatesList : any = [];
 
   @ViewChild('pdfMaker') el: ElementRef;
 
@@ -26,7 +27,13 @@ export class RentReceiptsComponent implements OnInit {
       if(this.UserStatus){
         this.Disabled = true;
       }     
-    })
+    });
+    this._rentReceptService.getStates().subscribe(sdata=>{
+      if(sdata.status==1){
+        this.StatesList = sdata;
+      }
+      
+    });
   }
 
   downloadData(){

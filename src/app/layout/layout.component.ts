@@ -14,10 +14,11 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit() {
     if(localStorage.getItem('currentUserId')){
-      console.log('asdasdasd');
       this.IsLoggedIn = true;
-      this._router.navigate(['/makepayments']);
     }
+    // else{
+    //   window.location.href='http://flexypay.in/#/login';
+    // }
   }
 
 }

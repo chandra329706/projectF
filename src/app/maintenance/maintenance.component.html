@@ -37,7 +37,7 @@
                         <div class="col-md-6">
                             <section style="border:1px dashed #b7b7b7">
                                 <select (change)="getMaintenanceDetails()" name="selectedProperty" #selectedPropertyVal="ngModel" [(ngModel)]="selectedProperty" required>
-                                  <option value="" disabled selected>Select Property</option>
+                                  <option value="">Select Property</option>
                                   <option *ngFor="let maintainance of MaintainanceListData.data" [value]="maintainance.Id" >{{maintainance.PropertyNickName}}</option>
                                 </select>
                             </section>
@@ -88,7 +88,7 @@
                     <div class="col-lg-12">
                         <div class="col-md-6">
                             <section>
-                                <input class="effect-2" type="text" placeholder="Amount" pattern="^(?:[2-9]|[2-9]\.\d*|[1-9]\d\d*|[1-9]\d\d*\.\d*)$" name="amount" #AmountVal="ngModel" [(ngModel)]="Amount" (keyup)="checkPaymethod(0)" required>
+                                <input class="effect-2" type="text" placeholder="Amount" pattern="^(?:[1-9]\d\d\d\d*|[1-9]\d\d\d*\.\d*)$" name="amount" #AmountVal="ngModel" [(ngModel)]="ActualAmount" (keyup)="checkPaymethod(0)" (keypress)="_keyPress($event)" required>
                                 <span class="focus-border"></span>
                             </section>
                             <div *ngIf="AmountVal.touched && (AmountVal.errors || AmountVal.invalid)" class="">
@@ -96,16 +96,10 @@
                                     <p class="error-text">Please enter the amount</p>
                                 </div>
                                 <div *ngIf="AmountVal.errors['pattern']">
-                                    <p class="error-text">Please enter amount greater than 2 <span style="font-family:arial">&#x20B9;</span></p>
+                                    <p class="error-text">Please enter amount greater than 999<span style="font-family:arial">&#x20B9;</span></p>
                                 </div>
                             </div>
                         </div>
-                        <!--<div class="col-md-6">
-                            <section>
-                                <input class="effect-2 pull-left" type="text" placeholder="Offer / Coupon Code" style="width:60%">
-                                <button type="button" class="btn btn-success pull-left" style="margin-top:20px;margin-left:10px">Apply</button>
-                            </section>
-                        </div>-->
                     </div>
                 </div>
 
@@ -137,7 +131,7 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="payMethod == '6'">
+                    <div *ngIf="payMethod == '6' && PaymentGatewayList.data.length>1">
                         <h3 style="line-height: 0.1;padding-right: 20px;"><small><span class="orange"><b>Payment Gateway</b></span></small></h3>
                         <div class="row">
                             <div>
@@ -175,6 +169,11 @@
                         </div>
                     </div>
 
+                </div>
+                <div class="clearfix">&nbsp;</div>
+                <div class="clearfix">&nbsp;</div>
+                <div class="row">
+                    Property Maintenance Beneficiary not found? Add it <a type="button" [routerLink]="['/addbeneficiary']" class="btn btn-primary">Here</a>
                 </div>
             </div>
             <div class="col-lg-5">
@@ -243,59 +242,6 @@
                         </div>
                         <div class="clearfix"></div>
 
-                        <div class="pull-left">
-                            <h5>Amount</h5>
-                        </div>
-                        <div class="pull-right">
-                            <h4 class="text-right">
-                                <span class="orange"><b> {{Amount}} <span style="font-family:arial">&#x20B9;</span></b>
-                                </span>
-                            </h4>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div class="pull-left">
-                            <h5>Wallet Balance</h5>
-                        </div>
-                        <div class="pull-right">
-                            <h4 class="text-right">
-                                <span class="orange"><b> - {{walletAmountUsed}} <span style="font-family:arial">&#x20B9;</span></b>
-                                </span>
-                            </h4>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div class="pull-left">
-                            <h5>Convenience fee</h5>
-                        </div>
-                        <div class="pull-right">
-                            <h4 class="text-right">
-                                <span class="orange"><b> {{ConvenienceFeeAmount}} <span style="font-family:arial">&#x20B9;</span></b>
-                                </span>
-                            </h4>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div *ngFor="let tax of UpdatedTaxesList">
-                            <div class="pull-left">
-                                <span *ngIf="tax.tax_type==2">
-                                    <h5>{{tax.tax_name}} ({{tax.tax_amount}} %)</h5>
-                                </span>
-                                <span *ngIf="tax.tax_type==1">
-                                    <h5>{{tax.tax_name}} ({{tax.tax_amount}} &#x20B9;)</h5>
-                                </span>
-                            </div>
-
-                            <div class="pull-right">
-                                <h4 class="text-right">
-
-                                    <span class="orange"><b> {{tax.tax_value | number : '1.2-2' }}<span style="font-family:arial">&#x20B9;</span></b>
-                                    </span>
-                                </h4>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-
 
 
                         <hr>
@@ -310,6 +256,71 @@
                             </h4>
                         </div>
                         <div class="clearfix"></div>
+
+                        <div class="text-right">
+                            <a (click)="showAmountBreakdown()" class="text-right">
+                                <ng-container *ngIf="!showBreakdown"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></ng-container>
+                                <ng-container *ngIf="showBreakdown"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></ng-container> Amount Breakdown</a>
+                        </div>
+                        <div class="clearfix">&nbsp;</div>
+                        <ng-container *ngIf="showBreakdown">
+
+                            <div class="pull-left">
+                                <h5>Amount</h5>
+                            </div>
+                            <div class="pull-right">
+                                <h4 class="text-right">
+                                    <span class="orange"><b> {{Amount}} <span style="font-family:arial">&#x20B9;</span></b>
+                                    </span>
+                                </h4>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="pull-left">
+                                <h5>Wallet Balance</h5>
+                            </div>
+                            <div class="pull-right">
+                                <h4 class="text-right">
+                                    <span class="orange"><b> - {{walletAmountUsed}} <span style="font-family:arial">&#x20B9;</span></b>
+                                    </span>
+                                </h4>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="pull-left">
+                                <h5>Convenience fee</h5>
+                            </div>
+                            <div class="pull-right">
+                                <h4 class="text-right">
+                                    <span class="orange"><b> {{ConvenienceFeeAmount}} <span style="font-family:arial">&#x20B9;</span></b>
+                                    </span>
+                                </h4>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div *ngFor="let tax of UpdatedTaxesList">
+                                <div class="pull-left">
+                                    <span *ngIf="tax.tax_type==2">
+                                    <h5>{{tax.tax_name}} ({{tax.tax_amount}} %)</h5>
+                                </span>
+                                    <span *ngIf="tax.tax_type==1">
+                                    <h5>{{tax.tax_name}} ({{tax.tax_amount}} &#x20B9;)</h5>
+                                </span>
+                                </div>
+
+                                <div class="pull-right">
+                                    <h4 class="text-right">
+
+                                        <span class="orange"><b> {{tax.tax_value | number : '1.2-2' }}<span style="font-family:arial">&#x20B9;</span></b>
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </ng-container>
+
+
+
                         <app-payment-component #paymentFormComponent></app-payment-component>
                         <!--[disabled]="maintenancePaymentForm.form['invalid']"-->
                         <button type="button" [disabled]="maintenancePaymentForm.form['invalid'] || DisablePay || DisableUserPay" (click)="payFee()" class="btn btn-success btn-lg col-md-12">Pay Now</button>

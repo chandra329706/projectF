@@ -19,9 +19,11 @@ export class RequestPaymentsComponent implements OnInit {
   UserStatus :any;
   ActiveMenusData :any = [];
   IsMenuActive : any;
+  mainData: any = {};
   
   ngOnInit() {
     // this.UserStatus = localStorage.getItem('UserStatus');
+    this.mainData.sender = localStorage.getItem('currentUserName');
     this._requestPaymentService.checkActiveMenus().subscribe(MData => {
       this.ActiveMenusData = MData;
       this.IsMenuActive = 0;

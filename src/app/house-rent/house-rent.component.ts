@@ -16,8 +16,8 @@ export class HouseRentComponent implements OnInit {
   DisablePay :any;
   MakeActive : any = true;
   CurrentYear : any = new Date().getFullYear();
-  SelectedYear :any;
-  SelectedMonth : any;
+  SelectedYear :any="";
+  SelectedMonth : any="";
   selectedProperty: any = '';
   remarks: any = '';
 
@@ -25,7 +25,8 @@ export class HouseRentComponent implements OnInit {
   propertiesList: any = [];
   propertyDetails: any = {};
   selectedProps: any = {};
-  Amount : any = '0.00';
+  ActualAmount : any;
+  Amount : any = (this.ActualAmount==NaN || this.ActualAmount==undefined)?0:this.ActualAmount;
   useWalletAmount: boolean = false;
   discountAmount: number = 0;
   PaymentMethodList: any = {};
@@ -135,6 +136,8 @@ export class HouseRentComponent implements OnInit {
 
 
   checkPaymethod(payMethodObj : any){
+    this.Amount = (this.ActualAmount==NaN || this.ActualAmount==undefined)?0:this.ActualAmount;
+    this.Amount = (this.Amount=="")?0:this.Amount;
     this.TaxTotal = 0;
     if(payMethodObj!=0){
       if(payMethodObj.id == '6'){
@@ -208,12 +211,20 @@ export class HouseRentComponent implements OnInit {
     this._HouseRentService.payFee(this.toSendData).subscribe(res => {
       this.paymentResult = res;
       if(this.paymentResult.status == 1){
-        var PaymetFormDetails = {'TotalAmount':Math.round(this.TotalAmount),'Remarks':(this.remarks=='')?"Bank Payment":this.remarks,'OrderID':this.paymentResult.transaction_code,'TransactionId':this.paymentResult.transaction_id,'PaymentFor':'HouseRent','UId':localStorage.getItem('currentUserId'),'Signature':localStorage.getItem('currentUserToken')};
+        var PaymetFormDetails = {'TotalAmount':Math.round(this.TotalAmount),'Remarks':(this.remarks=='')?"Bank Payment":this.remarks,'PaymentMethod':this.paymentMethod,'OrderID':this.paymentResult.transaction_code,'TransactionId':this.paymentResult.transaction_id,'PaymentFor':'HouseRent','UId':localStorage.getItem('currentUserId'),'Signature':localStorage.getItem('currentUserToken')};
         this.paymentComponent.SubmitPaymentDetails(PaymetFormDetails);
       }
       
     });
   }
+
+  _keyPress(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (!pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+}
 
 
 }

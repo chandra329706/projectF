@@ -74,7 +74,7 @@ console.log(this.LoggedUserDetails);
         localStorage.setItem('profile_photo', this.LoggedUserDetails.data.profile_photo);
 
         // this._router.navigate(['/makepayments']);
-        window.location.href='http://flexypay.in/';
+        window.location.href='http://flexypay.in';
         // window.location.href='http://localhost:4200/makepayments/';
       }else{
         this._router.navigate(['/']);
@@ -88,7 +88,17 @@ console.log(this.LoggedUserDetails);
     this.registrationDetails.pancard_image = this.base64textString;
     this._loginService.registration(this.registrationDetails).subscribe(res=>{
       this.registrationResult = res;
+      console.log(this.registrationResult);
+      if(this.registrationResult.status==1){
+        localStorage.setItem('currentUserToken', this.registrationResult.signature);
+        localStorage.setItem('currentUserId', this.registrationResult.userid);
+      }
     });
+  }
+
+  redirectToProfile(){
+    if(this.registrationResult.status==1)
+        window.location.href='http://localhost:4200/#/profile';
   }
 
   FPFormSubmit(){
